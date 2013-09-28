@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (TeX Live 2009)
+The top-level auxiliary file: srpaper-shashmi.aux
+The style file: alpha.bst
+Database file #1: srpaper-shashmi-biblio.bib
+You've used 20 entries,
+            2543 wiz_defined-function locations,
+            700 strings with 8063 characters,
+and the built_in function-call counts, 8353 in all, are:
+= -- 850
+> -- 378
+< -- 11
++ -- 132
+- -- 127
+* -- 571
+:= -- 1357
+add.period$ -- 62
+call.type$ -- 20
+change.case$ -- 123
+chr.to.int$ -- 20
+cite$ -- 20
+duplicate$ -- 347
+empty$ -- 614
+format.name$ -- 152
+if$ -- 1729
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 22
+newline$ -- 104
+num.names$ -- 60
+pop$ -- 113
+preamble$ -- 1
+purify$ -- 145
+quote$ -- 0
+skip$ -- 297
+stack$ -- 0
+substring$ -- 489
+swap$ -- 67
+text.length$ -- 11
+text.prefix$ -- 6
+top$ -- 0
+type$ -- 152
+warning$ -- 0
+while$ -- 84
+width$ -- 24
+write$ -- 264

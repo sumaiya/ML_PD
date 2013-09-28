@@ -1,0 +1,128 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{DAlTH12}
+
+\bibitem[CF01]{CF01}
+Kumar Chellapila and David~B. Fogel.
+\newblock Evolving an expert checkers playing program without using human
+  expertise.
+\newblock {\em IEEE Transactions On Evolutionary Computation}, 5:422--428,
+  2001.
+
+\bibitem[DAlTH12]{DAlTH12}
+Samarjit Das, Breogan Amoedo, F.~De la~Torre, and Jessica Hodgins.
+\newblock Detecting parkinsons' symptoms in uncontrolled home environments: A
+  multiple instance learning approach.
+\newblock In {\em Annual International Conference of the IEEE}, pages
+  3688--3691, 2012.
+
+\bibitem[Det89]{Det89}
+R~Detrano.
+\newblock International application of a new probability algorithm for the
+  diagnosis of coronary artery disease.
+\newblock {\em American Journal of Cardiology}, 64:304--310, 1989.
+
+\bibitem[FS95]{FS95}
+Yoav Freund and Robert~E. Schapire.
+\newblock A decision-theoretic generalization of on-line learning and an
+  application to boosting.
+\newblock In {\em Proceedings of the Second European Conference on
+  Computational Learning Theory}, EuroCOLT '95, pages 23--37, London, UK, UK,
+  1995. Springer-Verlag.
+
+\bibitem[GAD�98]{GAD98}
+H.~Altay Guvenir, Burak Acar, Gülsen Demiröz, and Ayhan Çekin.
+\newblock A supervised machine learning algorithm for arrhythmia analysis.
+\newblock In {\em In: Proc. Computers in Cardiology Conference}, pages
+  433--436, 1998.
+
+\bibitem[GM09]{GJ70}
+David Gil and Devadoss~Johnson Manuel.
+\newblock Diagnosing parkinson by using artificial neural networks and support
+  vector machines.
+\newblock {\em Global Journal of Computer Science and Technology}, 9(4), 2009.
+
+\bibitem[GMCL05]{GMCL05}
+Dayong Gao, Michael Madden, Des Chambers, and Gerard Lyons.
+\newblock Bayesian ann classifier for ecg arrhythmia diagnostic system: A
+  comparison study.
+\newblock In {\em Proc. of Int. Joint Conf. on Neural Networks}, 2005.
+
+\bibitem[Gre07]{Greenes2007}
+Robert~A. Greens.
+\newblock {\em {Clinical Decision Support: The Road Ahead}}.
+\newblock Academic Press, 2007.
+
+\bibitem[Joa98]{Joa98}
+Thorsten Joachims.
+\newblock Text categorization with suport vector machines: Learning with many
+  relevant features.
+\newblock In {\em Proceedings of the 10th European Conference on Machine
+  Learning}, ECML '98, pages 137--142, London, UK, UK, 1998. Springer-Verlag.
+
+\bibitem[KKG{\etalchar{+}}99]{KKG+99}
+Matjaz Kukar, Igor Kononenko, Ciril Groselj, Katarina Kralj, and Jure Fettich.
+\newblock Analysing and improving the diagnosis of ischaemic heart disease with
+  machine learning.
+\newblock {\em Artificial Intelligence in Medicine}, pages 25--50, 1999.
+
+\bibitem[Kon01]{Kon01}
+Igor Kononenko.
+\newblock Machine learning for medical diagnosis: history, state of the art and
+  perspective.
+\newblock {\em Artificial Intelligence in Medicine}, 23:89--109, 2001.
+
+\bibitem[MP43]{MP43}
+W.~S. McCulloch and W.~Pitts.
+\newblock A logical calculus of the ideas immanent in nervous activity.
+\newblock {\em Bulletin of Mathematical Biophysics}, 5:115--133, 1943.
+
+\bibitem[MP69]{MP69}
+M.~Minsky and S.~Papert.
+\newblock {\em Perceptrons}.
+\newblock Cambridge, MA: MIT Press, 1969.
+
+\bibitem[MS12]{MS12}
+Indrajit Mandal and N.~Sairam.
+\newblock Accurate telemonitoring of parkinson's disease diagnosis using robust
+  inference system.
+\newblock {\em International Journal of Medical Informatics}, 2012.
+
+\bibitem[Pod12]{Pod12}
+V.~Podgorolec.
+\newblock Analyzing eeg signals with machine learning for diagnosing
+  alzheimer's disease.
+\newblock {\em Electronics and Electrical Engineering}, 18:61--64, 2012.
+
+\bibitem[Ros58]{Ros58}
+Frank Rosenblatt.
+\newblock The perceptron: A probabilistic model for information storage and
+  organization in the brain.
+\newblock {\em Psychological Review}, 65(6):386--408, 1958.
+
+\bibitem[SK84]{SK84}
+Dj~Spiegelhalter and Rp~Knilljones.
+\newblock Statistical and knowledge-based approaches to clinical
+  decision-support. systems, with an application in gastroenterology.
+\newblock {\em Journal of the Royal Statistical Society, Series A: Statistics
+  in Society}, 147:35--77, 1984.
+
+\bibitem[TK01]{TK01}
+S.~Tong and D.~Koller.
+\newblock Support vector machine active learning with applications to text
+  classification.
+\newblock {\em Journal of Machine Learning Research}, 2:45--66, November 2001.
+
+\bibitem[TLMR10]{TLMR10}
+Athanasios Tsanas, Max~A. Little, Patrick~E. McSharry, and Lorraine~O. Ramig.
+\newblock Accurate telemonitoring of parkinson’s disease progression by
+  noninvasive speech tests.
+\newblock {\em IEEE Transactions on Biomedical Engineering}, 57(4):884--893,
+  2010.
+
+\bibitem[YC96]{yap1996}
+R.H. Yap and D.M. Clarke.
+\newblock An expert system for psychiatric diagnosis using the dsm-iii-r,
+  dsm-iv and icd-10 classifications.
+\newblock In {\em AMIA Annual Symposium Proceedings Archive}, 1996.
+
+\end{thebibliography}

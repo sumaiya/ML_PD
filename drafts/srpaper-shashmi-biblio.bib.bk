@@ -1,0 +1,216 @@
+@misc{Frank+Asuncion:2010 ,
+  author = "A. Frank and A. Asuncion",
+  title = "{UCI} Machine Learning Repository",
+  year = 2010,
+  howpublished = "\url{http://archive.ics.uci.edu/ml}",
+  institution = "University of California, Irvine, School of Information and Computer Sciences",
+  annotate = "An online repository of data sets across various fields. Can search by domain as well as attribute types and quantities. Particular attention was paid to data sets within the life sciences category with greater than 100 instances."
+}
+
+@article{Kononenko01machinelearning,
+  author = "Igor Kononenko",
+  title = "Machine learning for medical diagnosis: history, state of the art and perspective",
+  journal = "Artificial Intelligence in Medicine",
+  volume = 23,
+  pages = "89--109",
+  year = 2001,
+  annotate = "Describes the history of machine learning for medical diagnosis with an emphasis on Naive Bayes, neural networks, and decision trees. Emphasizes the need for ML algorithms in this domain to be able to handle noisy and missing data, rely on relatively few medical tests, and complement the role of physicians. Seven ML algorithms are evaluated on several criteria in general, as well as when applied to ischemic heart disease diagnosis."
+}
+
+@article{kukar:analysing,
+  author = "Matjaz Kukar and Igor Kononenko and Ciril Groselj and Katarina Kralj and Jure Fettich",
+  title = "Analysing and improving the diagnosis of ischaemic heart disease with machine learning",
+  journal = "Artificial Intelligence in Medicine",
+  pages = "25--50",
+  year = 1999,
+  annotate = "Collects data on ischemic heart disease consisting of signs and symptoms, ECG, and scintigraphy. Applies Naive Bayes, neural networks, k-nearest neighbors, and two decision tree algorithms, and compares these to clinicians' diagnoses. Naive Bayes has the best sensitivity (recall), whereas clinicians, followed by neural nets, have the highest specificity."
+}
+
+@inproceedings{Güvenir98asupervised,
+  author = "H. Altay Güvenir and Burak Acar and Gülsen Demiröz and Ayhan Çekin",
+  title = "A Supervised Machine Learning Algorithm for Arrhythmia Analysis",
+  booktitle = "In: Proc. Computers in Cardiology Conference",
+  pages = "433--436",
+  year = 1998,
+  annotate = "Presents a novel ML approach to diagnosing and classifying cardiac arrhythmia, called the VF15 algorithm. It uses a genetic algorithm to learn feature weights. Then, each feature 'votes' on a class prediction. The algorithm has a 62\% accuracy on this particular task and is found to outperform Naive Bayes."
+}
+
+@inproceedings{DemirozG97,
+  author = "Gülsen Demiröz and H. Altay Güvenir",
+  title = "Classification by Voting Feature Intervals",
+  booktitle = "Machine Learning: ECML-97, 9th European Conference on Machine Learning, Prague, Czech Republic, April 23-25, 1997, Proceedings",
+  pages = "85--92",
+  publisher = "Springer",
+  year = 1997,
+  annotate = "Provides a description of the VFI (Voting Feature Intervals) algorithm, on which VF15 is based."
+}
+
+@inproceedings{Gao05bayesianann,
+  author = "Dayong Gao and Michael Madden and Des Chambers and Gerard Lyons",
+  title = "Bayesian ANN Classifier for ECG Arrhythmia Diagnostic System: A Comparison Study",
+  booktitle = "Proc. of Int. Joint Conf. on Neural Networks",
+  year = 2005,
+  annotate = "Compares various ML algorithms for arrhythmia diagnosis based on ECG data, with an emphasis on minimizing false positives and dealing with noisy data. Highlights need to improve on VF15's 62\% accuracy. Uses the UCI ML Repository Arrhythmia dataset. Evaluates a Bayesian artificial neural network classifier as compared to Naive Bayes, decision trees, logistic regression, and neural networks."
+}
+
+
+@article {detrano1989international,
+  author = "R Detrano",
+  title = "International Application of a New Probability Algorithm for the Diagnosis of Coronary Artery Disease",
+  journal = "American Journal of Cardiology",
+  pages = "304--310",
+  volume = "64",
+  year = "1989",
+  annotate = "Derives a model from the Cleveland Clinic heart disease data set (also available at UCI ML Repository) and compares it to the CADENZA Bayesian algorithm. Both models are found to overpredict heart disease, though this occurs more with CADENZA."
+}
+
+@inproceedings{das2012,
+  author = "Samarjit Das and Breogan Amoedo and F. De la Torre and Jessica Hodgins",
+  title = "Detecting Parkinsons' symptoms in uncontrolled home environments: A multiple instance learning approach",
+  booktitle = "Annual International Conference of the IEEE",
+  pages = "3688--3691",
+  year = 2012,
+  annotate = "Describes a weakly supervised multiple instance learning approach to detecting symptoms of Parkinson's Disease. This approach addresses the issue of self-reporting resulting in inaccurate or incomplete labels."
+}
+
+@article{tsanas2010,
+  author = "Athanasios Tsanas and Max A. Little and Patrick E. McSharry and Lorraine O. Ramig",
+  title = "Accurate Telemonitoring of Parkinson’s Disease Progression by Noninvasive Speech Tests",
+  journal = "IEEE Transactions on Biomedical Engineering",
+  volume = 57,
+  number = "4",
+  pages = "884--893",
+  year = 2010,
+  annotate = "Proposes monitoring Parkinson's disease using speech tests, due to vocal impairment being a common symptom and early indicator. The test results are passed through signal processing algorithms and a classification and regression tree to predict a rating on the unified PD rating scale."
+}
+
+@article{mandal2012,
+  author = "Indrajit Mandal and N. Sairam",
+  title = "Accurate telemonitoring of Parkinson's disease diagnosis using robust inference system",
+  journal = "International Journal of Medical Informatics",
+  year = 2012,
+  annotate = "Provides an approach for Parkinson's disease diagnosis using speech tests. Applies logistic regression, Bayesian networks, neural networks, SVMs, AdaBoost, and ensemble methods."
+}
+
+@article{Moody2001,
+  author = "George B. Moody",
+  title = "The impact of the MIT-BIH Arrhythmia Database",
+  journal = "Engineering in Medicine and Biology Magazine, IEEE",
+  volume = 20,
+  number = "3",
+  pages = "45--50",
+  year = 2001,
+  annotate = "Describes the MIT-BIH database which provides ECG recordings from 47 subjects. Also discusses other ECG databases including the AHA Database for Evaluation of Ventricular Arrhythmia Detectors and the European ST-T Database."
+}
+
+@TECHREPORT{Platt98sequentialminimal,
+    author = {John C. Platt},
+    title = {Sequential Minimal Optimization: A Fast Algorithm for Training Support Vector Machines},
+    institution = {ADVANCES IN KERNEL METHODS - SUPPORT VECTOR LEARNING},
+    year = {1998},
+  annotate = "Describes the SMO algorithm for faster training of SVMs."
+}
+
+@inproceedings{yap1996,
+  title={An expert system for psychiatric diagnosis using the DSM-III-R, DSM-IV and ICD-10 classifications},
+  author={R.H. Yap and D.M. Clarke},
+  booktitle = {AMIA Annual Symposium Proceedings Archive},
+  year={1996},
+  annotate = "Describes a system for diagnosis of mental health disorders using constraint-based reasoning and user input."
+}
+
+@article{Tong+Koller:JMLR01,
+  author = "S. Tong and D. Koller",
+  title = "Support vector machine active learning with applications to text classification",
+  journal = "Journal of Machine Learning Research",
+  volume = 2,
+  pages = "45--66",
+  month = "November",
+  year = 2001,
+  annotate = "Describes a pool-based active learning model for SVMs which does not require a large set of labeled data. Applies this approach to a text classification problem."
+}
+
+@inproceedings{Joachims:1998:TCS:645326.649721,
+ author = {Joachims, Thorsten},
+ title = {Text Categorization with Suport Vector Machines: Learning with Many Relevant Features},
+ booktitle = {Proceedings of the 10th European Conference on Machine Learning},
+ series = {ECML '98},
+ year = {1998},
+ isbn = {3-540-64417-2},
+ pages = {137--142},
+ numpages = {6},
+ acmid = {649721},
+ publisher = {Springer-Verlag},
+ address = {London, UK, UK},
+annotate = "Describes how SVMs work, explains why they are well-suited to text categorization, and applies them to a specific problem."
+} 
+
+@article{Chellapila01evolvingan,
+    author = {Kumar Chellapila and David B. Fogel},
+    title = {Evolving an Expert Checkers Playing Program Without Using Human Expertise},
+    journal = {IEEE Transactions On Evolutionary Computation},
+    year = {2001},
+    volume = {5},
+    pages = {422--428},
+annotate = "Describes an evolutionary artificial neural network for evaluating checkers boards, used to train an expert player."
+}
+
+@article{rosenblatt58a,
+  added-at = {2013-09-13T01:44:06.000+0200},
+  author = {Rosenblatt, Frank},
+  interhash = {dc0cef9dc06033a04f525efdcde7a660},
+  intrahash = {afcce29c2471aaa8480d2c2159361e88},
+  journal = {Psychological Review},
+  keywords = {imported},
+  number = 6,
+  pages = {386-408},
+  timestamp = {2013-09-13T01:44:06.000+0200},
+  title = {The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain},
+  volume = 65,
+  year = 1958,
+annotate = "Describes a single-layer perceptron model with a learning rule."
+}
+
+@book{minsky1969,
+  added-at = {2009-10-23T10:49:34.000+0200},
+  author = {Minsky, M. and Papert, S.},
+  description = {phd thesis version 2009-10-23},
+  id = {2381411},
+  interhash = {9ad5b73f68093070d73e54312145eca2},
+  intrahash = {4587aec0472c41d00c38bf3e888304ba},
+  keywords = {imported},
+  priority = {2},
+  publisher = {Cambridge, MA: MIT Press},
+  timestamp = {2009-10-23T10:49:34.000+0200},
+  title = {Perceptrons},
+  year = 1969,
+annotate = "Describes the perceptron model and demonstrates its weaknesses, including its inability to implement non-linearly separable functions such as XOR."
+}
+
+@article{McCullochPitts43,
+  added-at = {2008-09-16T23:39:07.000+0200},
+  author = {McCulloch, W. S. and Pitts, W.},
+  description = {CCNLab BibTeX},
+  interhash = {f9ac013a9ed96a36c8771b3a1ce71702},
+  intrahash = {d6c807e181a4e6b9a6ae974c9922b477},
+  journal = {Bulletin of Mathematical Biophysics},
+  key = {McCulloch and Pitts},
+  keywords = {nnets},
+  pages = {115-133},
+  timestamp = {2008-09-16T23:39:07.000+0200},
+  title = {A logical calculus of the ideas immanent in nervous activity},
+  volume = 5,
+  year = 1943,
+annotate = "Describes an early artificial neuron model, strongly based on biological neurons. The artificial neuron receives several weighted inputs and produces an output, based on a threshold."
+}
+
+
+@article{Podgorolex12,
+  author = {Podgorolec, V.},
+  journal = {Electronics and Electrical Engineering},
+  pages = {61-64},
+  title = {Analyzing EEG signals with machine learning for diagnosing Alzheimer's disease},
+  volume = 18,
+  year = 2012,
+annotate = "Uses a machine learning algorithm trained on EEG data to diagnose Alzheimer's disease."
+}

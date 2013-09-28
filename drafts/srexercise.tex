@@ -1,0 +1,2677 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% An example LaTeX document for seniors completing their
+% senior exercise in Computer Science at Pomona College.
+%
+% Rett Bull
+% original document August 4, 2006
+% modified May 30, 2007
+% modified July 17, 2007
+% modified August 8, 2007
+% modified June 5, 2008
+% minor modifications June 1, 2009
+% annual modifications June 4, 2010
+% annual modifications, May 10 and August 17, 2011
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% The standard heading, with two commonly-used packages.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[finalcopy]{srpaper}
+
+\usepackage{url}
+\usepackage{graphicx}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% The information for the front matter.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{A Guide through the Senior Exercise}
+\author{Everett L. Bull, Jr.}
+\date{August 17, 2011}
+\advisor{Professors Kim Bruce and Tzu-Yi Chen, advisors}
+\abstract{Completion of a senior exercise in one's major is
+  a graduation requirement at Pomona College. In Computer
+  Science, the exercise may take one of three forms: a
+  project, a thesis, or participation in a clinic.  This
+  document serves as a guide to assist students in planning
+  planning and executing their senior exercises. It is
+  also an example of the format expected of the senior
+  paper or thesis.}
+\acknowledgment{The author is deeply grateful to Professors
+  Bruce, Chen, Kauchak, and Sood for their patient support and
+  generous suggestions, and to Patrick McNally for careful
+  copy-editing.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% START IGNORING HERE!
+%
+% Ignore everything down to "STOP IGNORING HERE!" It is
+% local customization that is unnecessary to a typical
+% senior paper or thesis.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% The following lines provide the magic to put links in
+% the on-line pdf version of the document. To enable the
+% magic, simply remove the comment symbol from before the
+% \usepackage[pdftex]{hyperref} specification.
+%
+% Without the hyperref package, \plainXXX is a synonym
+% for \XXX, \phantomsection does nothing, and
+% \namedref{Section}{label} produces the same thing as
+% Section~\ref{label}.
+%
+% With the hyperref package, \plainXXX produces a
+% reference or url without a link, while \XXX creates
+% the link. The command \phantomsection is used to
+% insure that links refer to the correct page. The
+% command \namedref{Section}{label} produces the same
+% text as above, but the link is all of
+% ``Section~\ref{label},'' giving the user more area
+% ``clicking area.''
+%
+%\usepackage[pdftex]{hyperref}
+\makeatletter
+\@ifundefined{hyperref}{%
+   \def\hyperref[#1]{}
+   \let\plainref\ref
+   \let\plainpageref\pageref
+   \let\plainurl\url
+   \let\phantomsection\relax
+   }{%
+   \newcommand{\plainref}{\ref*}
+   \newcommand{\plainpageref}{\pageref*}
+   \let\plainurl\nolinkurl
+   \hypersetup{letterpaper=true,
+               plainpages=false,
+               pageanchor=true,
+               breaklinks=true,
+               bookmarks=true,
+               bookmarkstype=toc,
+               bookmarksopenlevel=2,
+               bookmarksnumbered=true,
+               hyperindex=true,
+               colorlinks=true,
+               linkcolor=blue,
+               urlcolor=magenta,
+               citecolor=green,
+               pdftitle=\@title,
+               pdfauthor=\@author}}
+\makeatother
+\newcommand{\namedref}[2]{\hyperref[#2]{#1~\plainref{#2}}}
+\newcommand{\namedpageref}[2]{\hyperref[#2]{#1~\plainpageref{#2}}}
+
+%
+% We change the second-level ``bullet'' from a dash to a
+% diamond.
+%
+\renewcommand\labelitemii{$\diamond$}
+
+%
+% The following definition is from Oren Patashnik's BibTeX
+% documentation.
+%
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+%
+% These commands create the index. We change the index
+% environment a bit to match our spacing and conventions.
+% The multicol package does a better job of producing
+% multiple columns than the standard LaTeX \twocolumn.
+%
+\usepackage{makeidx,multicol}
+\makeindex
+\newcommand{\selfreferencejoke}{% assumes the index is
+                                % short enough so that
+                                % ``self reference'' appears
+                                % on the last page
+  \index{self reference}}
+\makeatletter
+\renewenvironment{theindex}
+  {\chapter*{\indexname}
+   \addcontentsline{toc}{chapter}{\indexname}
+   The index appears here as a convenience to
+   those using this guide. Normally, a paper
+   or research thesis will not have an index.
+   \setlength{\columnseprule}{\z@}
+   \setlength{\columnsep}{35\p@}
+   \thispagestyle{plain}
+   \begin{multicols}{2}
+     \setlength{\parskip}{\z@ \@plus .3\p@}
+     \setlength{\parindent}{\z@}
+     \let\item\@idxitem
+     \displayspacing
+     \small}
+  {\selfreferencejoke\end{multicols}\clearpage}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% STOP IGNORING HERE!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% The document begins here.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\frontmatter
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Preface
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\preface
+The Computer Science Department welcomes you to the senior
+exercise! We want you to have a rewarding and memorable
+experience as you complete your major with a valuable,
+rigorous, and fun final endeavor.
+
+The \textit{Pomona College Catalog}~\cite{PomonaCatalog}
+states, ``Each student's major will culminate in a senior
+exercise designed to deepen understanding and integrate the
+content and method of his or her field of study.'' Besides
+being a vehicle that deepens understanding and integrates
+content and method, the senior exercise ought to be a labor
+of love. We encourage you to begin thinking about your
+project in your junior year. Be creative. Speak to other
+students and faculty members and investigate several
+possibilities. This is the time to think broadly.
+
+There are three options for the senior exercise in Computer
+Science, described in detail in
+\namedref{Chapter}{Chapter:Premeditation}. You may undertake
+a project, develop a research thesis, or participate in a
+clinic. Your first decision is to select an option. Then, in
+the fall semester of your senior year, you will enroll in
+the Senior Seminar and begin work on your senior
+exercise. Depending on the option you select, you may enroll
+in another course besides the seminar. Your senior exercise
+will culminate in the spring of your senior year with a
+presentation and a written document; see
+\namedref{Chapters}{Chapter:Presentation}
+and~\ref{Chapter:Prose}.
+
+Early in the process, you will be paired with an advisor who
+will be a Computer Science faculty member at Pomona
+College. Working closely with your advisor, you will
+determine the shape of your senior exercise.
+
+In this guide, we have concentrated on the \emph{decisions}
+you must make and the \emph{mechanics} of the process, and
+we have tried to avoid being overly prescriptive about the
+\emph{nature} of an individual undertaking.  We hope that
+this guide will be helpful as you plan, execute, and
+complete your senior exercise. With thoughtful (and early)
+planning, your senior exercise will proceed smoothly. Please
+read this guide carefully and refer to it often; its pages
+contain experience and advice collected by students and
+faculty members over the past years. If you do find yourself
+in a crisis, refer to the suggestions in
+\namedref{Appendix}{Appendix:CrisisManagement}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Chapter: Premeditation
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Premeditation}
+\label{Chapter:Premeditation}
+There are three options for the senior exercise: a project,
+a research thesis, and a clinic experience. The project has
+been available for several years, while the thesis and
+clinic options were first offered in 2007--2008.
+
+Most of this chapter is devoted to detailed outlines of the
+three options, including the requirements, the schedule, the
+advisor, and the grading policies. There are some
+redundancies among the descriptions because we want each one
+to be self-contained. You can use the outline as a framework
+and a checklist as you work through the senior
+exercise. Read these outlines in conjunction with the list
+of approximate dates in \namedref{Appendix}{Appendix:Schedule}.
+The specific dates for the current academic year will be
+announced in the Senior Seminar, over e-mail, and on the
+Department's web site.
+
+ 
+\section{Common Features}
+Each senior must take Computer Science~190,
+\textit{Senior Seminar,}\index{senior seminar}
+which is a separate graduation
+requirement. The senior exercise component is a part
+of the seminar, and the grade in the senior seminar
+is based in part on preparations for the senior exercise.
+In the research thesis and clinic options,
+one of the required courses may count as an elective toward
+the major requirements.
+
+Each senior must attend the departmental
+colloquia\index{colloquium}, which
+are held approximately every other week on Thursday at
+4:15~pm. If for any reason you have to miss a colloquium,
+you may make it up by attending a colloquium at Harvey Mudd
+College or another event. Make the arrangements with the
+faculty member who is overseeing the senior exercise.
+
+Additionally, each senior must participate in monthly
+progress meetings\index{progress meetings},
+give a presentation toward the end of the spring semester of
+their senior year, and will submit some form of written
+work.
+
+Finally, each senior will have an advisor\index{advisor}
+who is a member of
+the Pomona College Computer Science faculty. The advisor for
+the senior exercise may or may not be the same as the
+student's academic advisor. The role of the advisor will
+vary according to the option, but in all cases, the advisor
+will guide the student through the ``local requirements,''
+including the progress meetings, the presentation, and the
+written work.
+
+Although the work for the senior exercise is done in several
+courses, one course in each option is identified as the
+``senior exercise course'' to satisfy the college
+requirement that a senior exercise receive at least one-half
+course credit.
+
+
+\section{Project}
+\index{project|(}
+A project is currently the default method of satisfying the
+senior exercise requirement. The project is carried out
+(normally) in the spring semester of the senior year, with
+some of the preparation being done in the preceding
+semester. A project can consist of software development,
+library research, or theoretical study. In all cases, there
+will be significant background research.
+
+The role of a project advisor\index{advisor!role of}
+varies according to the
+student, the advisor, and the topic. The advisor is
+sometimes quite directive, often a source of
+valuable advice, and frequently a sounding
+board for the student's ideas. In any case, you should
+expect to meet with your advisor regularly, at least weekly,
+over the course of the project. You and your advisor should
+develop a detailed schedule to keep the
+project on track.
+
+The advisor\index{advisor|(}
+must be a faculty member in the Computer Science
+Department of Pomona College. You may, of course, seek
+advice from faculty members in other departments or at other
+colleges. In some cases, students have worked most closely
+with someone other than their official departmental advisor.
+
+Matching a student with an advisor and a topic is a
+complicated process that depends, in part, on the student's
+interest. The student should, normally, have taken one or
+more advanced courses in the general area of the topic, and
+the advisor should have some expertise in that area. The
+student and the advisor should be comfortable working with
+one another. Also, because we want to divide the workload
+evenly among advisors, each potential advisor has a limit on
+the number of advisees. In mid-September students are
+asked to submit a ranked list of three or more 
+advisor-project pairings, and with understanding and good
+will, we expect to come to a fair
+and beneficial assignment. In any case, each student will
+have an advisor\index{advisor|)} 
+and a topic by about the third week of the
+fall semester of the senior year.
+
+\subsection*{Requirements for the Project}
+\index{project!requirements}%
+The requirements for the project option are as follows:
+\begin{itemize}
+\item
+Computer Science~190, \textit{Senior Seminar,} in the fall
+semester. In addition to the other work of the seminar, each
+student will
+\begin{itemize}
+\item
+submit a list of advisor-topic\index{advisor!choice of} pairs
+in the first weeks of the semester;
+\item
+complete the background research for the project and
+submit an annotated bibliography and a literature review
+at some point
+in the second half of the semester;
+\item
+acquire and install any software, data, or
+tools that are needed for the project; and 
+\item
+submit an extended abstract with a specific description
+of the proposed project's purpose and methods.
+\end{itemize}
+\item 
+Participation in the (approximately monthly) progress
+report meetings, both semesters. In the fall semester, the
+meetings will be part of the Senior Seminar.
+\item
+Attendance at the (approximately biweekly) departmental
+colloquia, both semesters.
+\item
+Computer Science~192, \textit{Senior Project,} in the spring
+semester. Most of the work on the project takes place in the
+first two-thirds of the semester. Each student will
+\begin{itemize}
+\item
+submit, shortly after the middle of the semester, a
+substantial draft that includes all the sections of the
+paper;
+\item
+give a formal presentation, near the end of the spring
+semester, of the project, experience, and conclusions; and
+\item
+submit a paper which reports on the project and its results.
+\end{itemize}
+\end{itemize}
+This document itself serves as a model for the form of the
+project report; see \namedref{Chapter}{Chapter:Prose}.
+
+\subsection*{Evaluation of the Project}
+\label{Section:ProjectEvaluation}
+\index{project!evaluation}
+Computer Science~190 and~192 count as one-half course
+each. Computer Science~192 is the designated senior exercise
+course.
+
+% This language is adapted from Kim Bruce's email of Feb 5, 2008.
+A student's grade in Computer Science~192 is determined jointly
+by the Computer Science faculty members who consider six
+components of the project:
+\begin{itemize}
+\item The goal of the undertaking. Was it appropriately
+ambitious?
+\item Preparation. Did the literature review and other 
+preparatory activities cover the appropriate prior work in
+the area?
+\item Execution. Were the efforts (both in quantity and
+quality) sufficient? Were all the intermediate and final
+deadlines met?
+\item Evaluation of results. Was the process of evaluation
+appropriate and thorough?
+\item Presentations. Were the oral and written presentations
+clear, understandable, and complete? Keep in mind that
+presentations are graded on \emph{both} content and delivery.
+\item Participation. Did the attendance and contribution to
+group meetings, conferences with the advisor, and the final
+presentation meet faculty expectations?
+\end{itemize}
+These items are interrelated, and there is no set number of 
+``points'' assigned to each one. In particular,
+there is an interaction between the first and third items.
+A wonderful execution of a trivial goal may not be worth 
+more than a weak outcome on a more challenging goal.  And a
+ridiculously challenging goal may preclude you from any success
+at all. The key is to find the right balance.
+
+Further, you should keep in mind that a successful project need
+not be one that is clearly better than all previous work in the
+area.  We often learn as much or more from experiments that fail
+as from those that succeed.  On the other hand, we do expect you
+to make your project as successful as possible within the time
+constraints.
+
+\phantomsection
+\index{grading}
+To state the criteria in another way,
+an\label{Page:ProjectGrading} \textbf{A-range} project is
+interesting, well-conceived, ambitious, and
+successful. There is a significant result, although it need
+not exactly match the original goal of the project. Any
+obstacles that arise are handled thoughtfully and
+creatively. All work is submitted on time. The presentation
+and the paper are clear, polished, and
+well-organized. In order to receive an A, all the
+components---conception, preparation, execution,
+presentation, and written work---must be of A~quality.
+
+A \textbf{B-range} project is fairly ambitious but only
+partly successful, or else it is less ambitious and solidly
+successful. There are results, but they may be incomplete or
+tentative. All the requirements and deadlines are met. The
+presentation and the paper or thesis are clear and
+organized.
+
+A \textbf{C-range} project is insubstantial or falls short
+of its goals; there are few definite results. All the
+requirements are met, even if some of the work is a little
+late. The presentation and the paper or thesis are
+disorganized or occasionally muddled.
+
+A \textbf{failing} project is poorly conceived and
+inadequately executed. It is lacking substance that might
+lead to a solid and interesting conclusion. Some of the work
+may be seriously late or missing altogether. The
+presentation and paper are ungrammatical or difficult to
+follow.
+
+\phantomsection
+In\label{Page:SeniorExerciseGrading} addition to the grades
+in the various courses, the Pomona College Senior Exercise
+is graded ``not passed,'' ``passed,'' or ``passed with
+distinction.'' The designation appears on the transcript. It
+is rare, but not without precedent, for a student to fail
+the senior exercise and therefore not graduate. At the other
+end of the spectrum, ``distinction'' is reserved for a small
+number of really outstanding senior exercises. A grade of A
+in the senior exercise course does not guarantee a rating of
+``distinction'' on the senior exercise.\index{project|)}
+
+
+\section{Group Project}
+\index{group project|(}
+In 2010-2011, the Computer Science department will offer the option 
+of a group project with Professor Bruce as the advisor. A team of up
+to five students will collaborate on developing software for mobile
+devices. If the experiment is successful, the group project may become a
+standard option for the senior exercise in future years.
+
+The procedural details for the group project are similar to those for
+the project and will be worked out in more detail during the year.
+In place of background research and the annotated bibliography,
+students will learn about the languages and systems to be used.
+In the case of mobile devices, network communications and human
+interface design are important issues to be studied. The extended
+abstract will contain a complete design of the software and
+allocation of tasks to individual students.
+
+Students who are interested in the group project will list it
+as one of the advisor-project pairs that is submitted in
+mid-September. The team will have at most five members, and it
+may have fewer. There is no guarantee that
+everyone who wants to participate in the group will be
+selected.
+
+\subsection*{Requirements for the Group Project}
+\index{group project!requirements}%
+The requirements for the group project option are as follows:
+\begin{itemize}
+\item
+Computer Science~190, \textit{Senior Seminar,} in the fall
+semester. In addition to the other work of the seminar, the
+members of the group will
+\begin{itemize}
+\item
+learn the fundamentals and design principles that will guide
+the project,
+\item
+become competent with the software tools to be
+used,
+\item
+create a detailed design of the system to be created, and
+\item
+assign specific spring-semester tasks to team members.
+\end{itemize}
+\item
+Attendance at regular meetings with the group and its advisor. 
+The team will meet weekly in the fall semester and more
+frequently in the spring. The advisor will attend at least
+one meeting a week.
+\item
+Participation in the (approximately monthly) progress
+report meetings, both semesters. In the fall semester, the
+meetings will be part of the Senior Seminar.
+\item
+Attendance at the (approximately biweekly) departmental
+colloquia, both semesters.
+\item
+Computer Science~192, \textit{Senior Project,} in the spring
+semester. Most of the work on the group project will occur in the
+first two-thirds of the semester. As with the regular project,
+there will be a paper that reports on the project and its results
+and a formal presentation. The extent and content of the paper
+and presentation will be determined in consultation with the
+advisor.
+\end{itemize}
+
+\subsection*{Evaluation of the Group Project}
+\index{group project!evaluation}
+As in the regular project, Computer Science~190 and~192 count as one-half course
+each, and Computer Science~192 is the designated senior exercise
+course. A student's grade in Computer Science~192 is determined jointly
+by the Computer Science faculty members based on criteria similar to
+those for the regular project; see \namedref{Section}{Section:ProjectEvaluation}.
+The grade will be based both on the individual team member's performance \emph{and}
+the overall effectiveness of the group.
+\index{group project|)}
+
+
+\section{Research Thesis}
+\index{research thesis|(}
+The research thesis option is for those students who want to
+investigate a topic more deeply. The topic is an aspect of
+the thesis advisor's research program, and the work is
+carried out in close cooperation with the 
+advisor.\index{advisor|(} The
+finished product will be a substantial written thesis. A
+research thesis is a substantial undertaking that involves
+a full course in each semester of the senior year.
+
+Students wishing to satisfy the senior exercise through the
+research thesis option must obtain permission from the
+department early in the spring semester of their junior
+year. Students who are interested in the thesis should
+approach a potential advisor in plenty of time to discuss
+the possibilities. Often preparatory research is done in the
+junior year or during the summer before the senior year.
+
+The research thesis option is excellent preparation for a
+student who is considering graduate school. It is intended
+for students who are passionate about a particular topic,
+can work independently, and are well-equipped to pursue the
+project. Because of the intense and personal nature of the
+research thesis, the student and thesis 
+advisor\index{advisor|)} must
+mutually agree to work together. We cannot guarantee that
+every student will have the opportunity to do a research
+thesis.
+
+\subsection*{Requirements for the Research Thesis}
+\index{research thesis!requirements}
+\begin{itemize}
+\item
+Computer Science~190, \textit{Senior Seminar,} in the fall
+semester. In addition to the other work of the seminar,
+each student will complete the background research for the
+thesis and submit an annotated bibliography, a
+literature review, and an extended abstract in the second
+half of the semester.
+\item 
+Participation in the (approximately monthly) progress report
+meetings, both semesters. In the fall semester, the meetings
+will be part of the Senior Seminar.
+\item
+Attendance at the (approximately biweekly) departmental
+colloquia, both semesters.
+\item 
+Computer Science~191, \textit{Senior Research and Thesis in
+Computer Science,} in the fall semester.
+\item
+Computer Science~191, \textit{Senior Research and Thesis in
+Computer Science,} in the spring semester. Each student will
+\begin{itemize}
+\item
+submit, shortly after the middle of the semester (or earlier
+if the advisor requests it), a substantial draft that
+includes all the sections of the thesis;
+\item
+give a formal presentation, near the end of the spring
+semester, of the thesis, experience, and conclusions; and
+\item
+submit the completed thesis at the end of the semester.
+\end{itemize}
+\end{itemize}
+This document itself serves as a model for the form of the
+thesis; see \namedref{Chapter}{Chapter:Prose}.
+
+\subsection*{Evaluation of the Research Thesis}
+\index{research thesis!evaluation}
+Computer Science~190 counts as one-half course. Computer
+Science~191 counts as a full course each semester. The fall
+semester of that course may count as an elective toward the
+major requirements; the spring semester is the designated
+senior exercise course.
+
+The grading standards for Computer Science~191 are the same
+as for the project; see the descriptions on
+\namedpageref{page}{Page:ProjectGrading}. Obviously, the
+research thesis is expected to be longer and more
+substantial than the paper for a project. The thesis
+advisor\index{advisor}
+will have a significant role in the determination of the
+grades for Computer Science~191.
+
+As stated on
+\namedpageref{page}{Page:SeniorExerciseGrading}, students
+will also receive a grade for the overall senior
+exercise---not passed, passed, or passed with distinction.%
+\index{research thesis|)}
+
+
+\section{Clinic}
+\index{clinic|(}
+The Harvey Mudd College Computer Science Clinic is a
+program in which a corporation or research organization
+sponsors an academic-year-long effort to solve a real-world
+problem. A team of three to five students, together with a
+faculty advisor and a liaison from the client, works on the
+problem and provides written and oral reports to the
+client. For more information, see
+\url{http://www.cs.hmc.edu/clinic}.
+
+A Pomona College student may satisfy the senior exercise
+requirement by participating in a clinic project. The clinic
+experience requires participation in both semesters of a
+Computer Science Clinic project at Harvey Mudd
+College. Students taking this option will work closely with
+the project advisor and the other team members. Each student
+will have, in addition, a Pomona College 
+advisor\index{advisor} to provide
+guidance through the local requirements.
+
+The clinic option is well-suited for students who want to
+participate in a team effort or students who are interested
+in ``trying out'' a career in industry.
+
+Computer Science~121, \textit{Software Development,} is a
+prerequisite for the clinic.\index{clinic!prerequisite}
+
+Students wishing to satisfy the senior exercise through the
+clinic option must obtain permission from the department
+early in the spring semester of their junior year. An early
+commitment is necessary because Harvey Mudd College plans
+its clinic projects well in advance. Students must
+preregister in the spring to take Computer Science~183 in
+the fall semester of their senior year.
+
+\subsection*{Requirements for the Clinic}
+\index{clinic!requirements}
+\begin{itemize}
+\item
+Computer Science~190, \textit{Senior Seminar,} in the fall
+semester.
+\item
+Participation in the (approximately monthly) progress report
+meetings, both semesters. In the fall semester, the meetings
+will be part of the Senior Seminar.
+\item
+Attendance at the (approximately biweekly) departmental
+colloquia, both semesters.
+\item
+Computer Science~183 and~184, \textit{Computer Science
+Clinic I and II,} in the fall and spring semesters,
+respectively. A student must participate in all aspects of
+the clinic, including the reports and presentations to
+sponsors. The clinic is a full-year commitment; a student
+who enrolls in the fall is expected to participate through
+the completion of the project in the spring.
+\item
+An individual presentation, near the end of the spring
+semester, describing the clinic project, its successes and
+failures, and its results.
+\item
+A copy of the final clinic report. The clinic report
+will serve as the written record of the senior exercise; a
+separate individual report is not required.
+\end{itemize}
+
+\subsection*{Evaluation of the Clinic}
+\index{clinic!evaluation}
+Computer Science~190 counts as one-half course. Computer
+Science~183 and~184 each count as a full course.
+Computer Science~183 may count as an elective
+toward the major requirements; Computer Science~184 is the
+designated senior exercise course.
+
+Students following the clinic option are, of course, graded
+by their clinic advisor in Computer Science~183 and 184 in
+accordance with the policies of the Harvey Mudd College
+Computer Science Clinic.
+
+As stated on \namedpageref{page}{Page:SeniorExerciseGrading},
+students will also receive a grade for the overall senior
+exercise---not passed, passed, or passed with
+distinction. The grade will be determined by the Pomona
+College Computer Science faculty in consultation with the
+advisor of the clinic project.\index{clinic|)}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Chapter: Preparation
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Preparation}
+\label{Chapter:Preparation}
+This chapter is written \emph{primarily} for students
+following the project and research thesis options. By the
+beginning of the fall semester of the senior year, everyone
+will have an advisor\index{advisor} and a
+topic.\index{topic!choosing} The research thesis
+students will have made those decisions much earlier. As
+part of the work for the Senior Seminar, project and
+research thesis students will carry out background research
+and submit annotated bibliographies and literature reviews,
+as described in
+\namedref{Sections}{Section:AnnotatedBibliography}
+and~\ref{Section:LiteratureReview}.
+
+Those participating in a clinic have already made
+decisions---one way or another---about advisors and topic,
+and the course of their work follows a different
+schedule. Everyone, though, can benefit from the comments on
+scheduling in \namedref{Section}{Section:Scheduling}.
+
+
+\section{Advisor and Topic}
+\label{Section:AdvisorAndTopic}
+\index{topic!choosing}
+\index{advisor|(}
+The first task is to find an advisor and a topic. Sometimes,
+students have a clearly-formulated topic in mind and look
+for an advisor who will help them refine and develop it. In
+other cases, students select an advisor first and then
+investigate various topics. There is nothing wrong with
+``shopping around'' at the beginning of the process. Be
+willing to speak with several possible advisors and hear
+their suggestions for topics.
+
+The choice of a topic requires careful thought. Keep an open
+mind as you search.  Although many students write long
+programs, it is not necessary to write any code at all. A
+project or thesis might be a collection of data on how
+humans use computers, a study of legal or social issues
+connected with information technology, a statistical
+analysis of network performance, a proof of correctness or
+careful computation of complexity for an algorithm, a design
+of an aspect of a programming language, or an exposition of
+one of the deep ideas in Computer Science.
+
+Look for a topic that is interesting, deep, specific, and
+feasible. The topic should, first and foremost, be
+\emph{interesting} to you. After all, you will be spending a
+whole semester (or a whole academic year, in the case of a
+research thesis) working on it. In the spirit of the Pomona
+College Senior Exercise, the undertaking should ``deepen
+your understanding'' and ``integrate the methods and
+content'' of Computer Science.
+
+The topic should also be \emph{deep} in the sense that it
+builds on the courses you have taken for your Computer
+Science major. A student who just finished a couple of
+introductory courses would not be prepared to complete a
+project or thesis on such a topic. The most successful
+undertakings are ones in which the student has completed one
+or more advanced courses in the area. It is also desirable
+to choose a topic close to your advisor's areas of
+expertise.
+
+Generally, a more modest undertaking that is well-done is
+preferable to an ambitious but haphazardly-executed one. On
+the other hand, an utterly trivial task will not receive an
+A, no matter how well it is done.
+
+The project or thesis proposal must be \emph{specific} in
+that it attempts to answer a question, illustrate a
+principle, explain an important idea, or conduct an
+experiment. It is not enough just ``to write a program'' or
+``to try something and see what happens.'' When it comes
+time to present your work, you want to have a clear and
+specific conclusion.
+
+As you evaluate possible topics, think about what kind of
+conclusion is appropriate. Is it a statistical analysis, a
+proof, a graphical display, or something else? Whatever it
+is, it will take some effort to create.
+
+Finally, the project or thesis must be \emph{feasible.} On
+one hand, you will be working on it for \emph{a whole
+semester} (or \emph{a whole year,} in the case of a
+thesis). On the other, you have \emph{only one semester} to
+do it, and you will have other courses and activities during
+that time.  And as you get to the end, you will have
+\emph{only a few weeks} to finish it.  Many projects and
+theses, but not all of them, involve intensive coding. If
+you are thinking of writing code, keep in mind that
+(1)~coding takes longer than you think it will, and
+(2)~there are other parts of the project that are equally
+important. Even if you do not plan to write programs, make
+realistic estimates of the time required to complete the
+project.
+
+We all understand that your ideas and your work will
+evolve. Stay flexible and expect to change your direction
+slightly as you learn more about the subject. Your plans may
+even include decisions to be made on the basis of early
+work. Careful planning at the beginning will, however,
+reduce the possibility that you will have to throw out
+everything and start over.
+
+Your advisor\index{advisor|)} can help you to achieve the
+right equilibrium among the competing qualities of
+interest, depth, precision, and feasibility.
+
+
+\section{Annotated Bibliography}
+\label{Section:AnnotatedBibliography}
+\index{annotated bibliography}
+Once you have decided on a topic, your first task is to
+begin collecting information about it. (That process may, in
+fact, begin earlier---as you are casting about for a
+subject.) It is highly unlikely that you are the first
+person to be interested in the subject. Find out what others
+have done. Who was the first to raise the general question?
+What are the significant developments in the subject? Have
+others tried to solve similar problems? If so, in what ways
+were they successful? What is the origin of your specific
+approach, and what are the competing approaches? How does
+your project differ from previous work?
+
+Work with your advisor to get started. Often, once you find
+a few current articles, you can use their reference lists to
+work your way back in time to the original works on the
+subject.
+
+For each article you find, keep a record of the full
+bibliographic citations and a summary of the
+article---anywhere from a short phrase to a few
+paragraphs. \namedref{Figure}{Figure:SampleAnnotatedBibliography}
+shows three annotated records: a journal article, a piece of
+software, and a submission to a conference.
+\begin{figure}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+% We manually modify the bibliography environment.
+\renewcommand{\chapter}[2]{}
+\renewenvironment{quotation}{\par}{}
+\footnotesize
+\begin{thebibliography}{GJS76}
+\bibitem[GJS76]{GibbsPoSt76}
+N.~E. Gibbs, W.~G.~Poole Jr., and P.~K. Stockmeyer.
+\newblock An algorithm for reducing the bandwidth and
+  profile of a sparse matrix.
+\newblock {\em {SIAM} J. Num. Anal.}, 13(2):236--250, April
+  1976.
+\begin{quotation}\noindent
+  Looks at improving the RCM algorithm [LiuSh76].  Basically
+  original cm and rcm algorithms suggest trying \emph{many}
+  start nodes and taking the one which leads to ordering of
+  smallest bandwidth. They show, in part, how to reduce the
+  number of bfs's that are done.\par
+  Pseudo-diameter: run the bfs once, then take the nodes in
+  the last level and run bfs again using each of those last
+  nodes as the new root. Goal is to end up with two
+  endpoints of a pseudo-diameter. They provide an algorithm
+  for merging bfs trees from each endpoint (helps minimize
+  width).\par They demonstrate the algorithm on an
+  assortment of structured grids.
+\end{quotation}
+\par\vspace{0.5\topsep}
+\bibitem[IPM]{IPM05}
+{IPM}: integrated performance monitoring.
+\newblock \plainurl{http://www.nersc.gov/projects/ipm}.
+\begin{quotation}\noindent
+  Describes a tool that generates a detailed performance
+  profile for parallel codes. Low overhead, no source code
+  modification, summarizes computation and communication
+  costs. [checked web site 6/1/07]
+\end{quotation}
+\par\vspace{0.5\topsep}
+\bibitem[SSl05]{SchwartzStWe05}
+J.~Schwartz, A.~Steger, and A.~Wei\ss l.
+\newblock Fast algorithms for weighted bipartite matching.
+\newblock In S.~E. Nikoletseas, editor, {\em Proceedings of
+  the 2005 Workshop on Experimental Algorithmics (WEA
+  2005)}, volume 3503 of {\em LNCS}, pages 476--487, 2005.
+\begin{quotation}\noindent
+  Asked by a company to come up with a faster way to compute
+  minimum weight perfect matchings on complete bipartite
+  graphs ($n>10000$). Standard algorithms ($O(n^3)$ for real
+  weights, $O(\sqrt{n}m\log(nC))$ for integer weights) too
+  expensive.\par They experiment with discarding a large
+  subset of the edges in the following way: first keep the
+  smallest $(c\log n)$ smallest edges adjacent to each
+  vertex, then add in $c' n\log n$ uniformly at random
+  chosen edges of $E$. The second means that, by a theorem
+  of Erd\"os and R\'enyi, the new graph has a perfect matching
+  with high probability.\par Then can use sparse algorithms
+  to compute perfect matching. For arbitrary edge weights
+  can get upper bound on achieved approximation factor based
+  on choice of $c$. For uniformly distributed edge weights
+  can show will get optimal matching with high probability
+  based on a theorem by Frieze and Sorkin which bounds the
+  heaviest edge in a min-weight perfect matching for a
+  complete bipartite graph in this case.\par In tests on
+  real data, find if highly structured, need $c>120$,
+  otherwise 15 ok. $c'$ was set small ($=4$). If generate
+  random uniformly distributed edge weights, cutoff value of
+  $c=4$ was enough.
+\end{quotation}
+\end{thebibliography}
+\end{minipage}
+\end{center}
+\caption[Sample annotated bibliography]{Three entries from
+an actual annotated bibliography, courtesy of Professor
+Tzu-Yi Chen.}
+\label{Figure:SampleAnnotatedBibliography}
+\end{figure}
+
+Evaluate each article critically. Is there a well-defined
+problem or question? What is the article's conceptual or
+theoretical framework? Is the approach or methodology
+appropriate and effective? Are the experiments repeatable?
+(You might even try repeating one or two.) Is the
+presentation clear and logical? Do the data or the arguments
+support the conclusions? What contribution does the article
+make to your topic?
+
+The annotated bibliography will, ultimately, contain all the
+works connected to your topic. You may omit those papers you
+found to be irrelevant. By the time you have completed the
+bibliography, you should have a sense that you really
+understand the development of the field and the current
+state of the art.
+
+\subsection{Quality of Sources}
+\index{quality of sources|(}
+\index{annotated bibliography!sources|see{quality of sources}}
+As you carry out your research, look for authoritative,
+reliable sources. They are the works that are released by
+reputable publishers, are written by authors with respected
+credentials, or have gone through rigorous peer-review
+processes.
+
+The following types of works are examples of unassailable
+sources:
+\begin{itemize}
+\item scholarly books;
+\item articles in well-known, refereed journals; and
+\item contributions to well-regarded, refereed conferences.
+\end{itemize}
+Your advisor\index{advisor!role of}
+can help you understand which journals are
+``well-known'' and which conferences are ``well-regarded.''
+Conference papers are frequently followed
+by journal articles; in those cases, you should cite the
+journal article.
+
+As a general rule, avoid citing a source that only appears
+on the web \cite{SeniorExerciseGuide}.  The reference
+\cite{AKS2002} is an example of such a paper. It is, by far,
+preferable to cite the later publication \cite{AKS2004}. If
+a published work appears also on the web, it is helpful to
+the reader to give the url as well, as was done in
+\cite{AKS2004}.
+
+A valuable resource for your work is the CiteSeer database
+of articles in computer science. See
+\url{http://citeseer.ist.psu.edu} or the mirrors at
+\url{http://citeseer.csail.mit.edu} and
+\url{http://citeseer.ittc.ku.edu}. The Association for
+Computing Machinery's Digital Library, at
+\url{http://portal.acm.org/dl.cfm}, is available on campus
+(through financial support from
+Honnold Library), as are many of the publications of the
+Institute of Electrical and Electronics Engineers; see
+\url{http://www.ieee.org/web/publications/home/index.html}.
+
+Some works do not appear on the web at all. This is
+particularly true for some of the seminal, ground-breaking
+papers from decades ago. As it is important to read and to
+cite these works, you will probably have to use some of
+Honnold Library's databases (just plain Google will not do
+the job!), and you may even have to set foot inside a
+library.
+
+An exception to the ``no web'' rule is a work that is brand
+new and has not yet been published. For example,
+\cite{AKS2004} would not have been published in 2002, and
+\emph{at that time} a citation of \cite{AKS2002} would have
+been acceptable.
+
+Another possible exception to the ``no web'' rule is
+software. You may use software that you acquired from the
+web, and you should cite the source. The item labeled [IPM]
+in \namedref{Figure}{Figure:SampleAnnotatedBibliography} is
+an example of such a citation. There is often a published
+paper that accompanies the software (and is listed on the
+site with the software), and when it exists, you should
+include a reference to the paper is well.
+
+The following works are potentially acceptable, depending
+upon the situation:
+\begin{itemize}
+\item technical reports from major universities,
+\item white papers from corporations,
+\item articles from newspapers and the popular press, and
+\item blogs or on-line essays from well-known authorities.
+\end{itemize}
+Technical reports are often preliminary versions of conference
+papers or journal articles. Cite the later, refereed versions
+when they are available.
+
+Sometimes industry white papers are the only sources of 
+authoritative information. Examples include the Java 
+specifications from Sun Microsystems and the detailed
+Pentium specifications from Intel.
+
+News articles and blogs can be especially helpful in
+providing a contextual setting or give a sense of the field
+at a particular moment. However, they are unlikely
+to be central to the main topic.
+
+The following types of works are \emph{never} authoritative:
+\begin{itemize}
+\item writings that appear only on the web and offer no
+evidence of reliability, and 
+\item Wikipedia articles.
+\end{itemize}
+Remember that a web search is as likely to turn up the term
+paper of a high school student or the blog of a wacko as it
+is to find an article of a reputable expert from a known
+publisher. The reason that Wikipedia articles are never
+deemed reliable is that they are written anonymously by
+authors whose credentials are unknown; there is no reason to
+be confident that a Wikipedia article is complete or
+correct. Wikipedia may be useful, however, in leading you to
+more authoritative sources.\index{quality of sources|)}
+
+\subsection{Creating the Bibliography}
+\index{annotated bibliography!formatting|(}
+Use \LaTeX\ and \BibTeX\ to prepare your annotated
+bibliography. General information about \LaTeX\ appears in
+\namedref{Sections}{Section:LaTeXIntro}
+and~\ref{Section:LaTeXAnatomy}, and the \BibTeX\ format
+is described in \namedref{Section}{Subsection:Bibliographies}.
+The book \cite{Lamport1994} contains a comprehensive
+introduction to \BibTeX.
+The \BibTeX\ source for the annotated bibliography of
+\namedref{Figure}{Figure:SampleAnnotatedBibliography} appears in
+\namedref{Figure}{Figure:SampleAnnotatedEntries}.
+\begin{figure}
+\begin{center}
+\begin{minipage}{0.9\textwidth}\fontsize{9}{10}
+\begin{verbatim}
+@Article{GibbsPoSt76,
+  author =  {N.~E.~Gibbs and W.~G.~Poole~Jr. and P.~K.~Stockmeyer},
+  title =   {An algorithm for reducing the bandwidth and profile
+             of a sparse matrix},
+  journal = {{SIAM} J. Num. Anal.},
+  year = 1976,
+  volume = {13},
+  number = {2},
+  pages = {236-250},
+  month = {April},
+  annotate = "Looks at improving the RCM algorithm [LiuSh76].
+    Basically original cm and rcm algorithms suggest trying
+    \emph{many} start nodes and taking the one which leads to
+    ordering of smallest bandwidth.  They show, in part, how
+    to reduce the number of bfs's that are done.\par
+
+    ..."
+}
+
+@Misc{IPM05,
+  title = {{IPM}: integrated performance monitoring},
+  howpublished = {\url{http://www.nersc.gov/projects/ipm}},
+  annotate = {
+    Describes a tool that generates a detailed performance
+    profile for parallel codes.  Low overhead, no source code 
+    modification, summarizes computation and communication 
+    costs.  [checked web site 6/1/07]}
+}
+
+@InProceedings{SchwartzStWe05,
+  author = {J.~Schwartz and A.~Steger and A.~Wei\ss{}l},
+  title = {Fast algorithms for weighted bipartite matching},
+  booktitle = {Proceedings of the 2005 Workshop on Experimental
+               Algorithmics (WEA 2005)},
+  year = {2005},
+  pages = {476--487},
+  editor = {S.~E.~Nikoletseas},
+  volume = {3503},
+  series = {LNCS},
+  annotate = "Asked by a company to come up with a faster way
+    to compute minimum weight perfect matchings on complete
+    bipartite graphs ($n>10000$).  Standard algorithms
+    ($O(n^3)$ for real weights, $O(\sqrt{n}m\log(nC))$ for
+    integer weights) too expensive.\par
+
+    ..."
+}
+\end{verbatim}
+\end{minipage}
+\end{center}
+\caption[Sample bibliographic entries]{The sources for the
+bibliographic items in
+\namedref{Figure}{Figure:SampleAnnotatedBibliography}. The
+annotations have been truncated to save space.}
+\label{Figure:SampleAnnotatedEntries}
+\end{figure}
+
+This may be your first experience with \LaTeX. The biggest
+part of the task will be creating the bibliography file. 
+The sample file
+\texttt{srpaper\discretionary{-}{}{-}sample-biblio.bib}%
+\index{sample files!annotated bibliography}%
+\index{annotated bibliography!sample files}
+provides an example of such a file, with many different kinds
+of entries.
+
+Once you have the bibliography file, creating the final
+document is easy. Copy and rename the template file
+\texttt{annbib-template.tex}%
+\index{sample files!bibliography template}
+and then edit it to fill in a
+few fields. The comments will direct you to the relevant
+places in the template file. If you renamed the sample file
+to \texttt{mybib.tex}, then the command-line arguments to
+produce the document appear below; see
+\namedref{Section}{Section:LaTeXAnatomy}. The result is the
+file \texttt{mybib.pdf}.
+\begin{code}
+latex mybib
+bibtex mybib
+latex mybib
+latex mybib
+\end{code}
+Please send copies of the completed bibliography to your
+advisor and to the instructor in charge of the Senior
+Seminar. See \namedref{Appendix}{Appendix:Schedule} for
+an approximate 
+due date.\index{annotated bibliography!formatting|)}
+
+
+\section{Literature Review}
+\label{Section:LiteratureReview}
+\index{literature review|(}
+At the end of the fall semester, you will submit a
+literature review. It will normally consist of two to six
+pages of prose and a complete bibliography. If your
+annotated bibliography is already a complete compilation of
+the relevant sources, then all that remains to do is to
+write a clear description of the history of the
+subject---with citations.  In many cases, you will identify
+one or two primary resources that you will consult in depth
+during the spring semester. The completed review will give
+you a clear sense of the context into which your work fits.
+
+The literature review is a \emph{draft} of the
+``background'' chapter of your project paper. As you
+complete the project in the spring semester, you will no
+doubt run across other sources and include them in your
+summary of previous work.
+
+The ability to carry out background research is
+important. When you have completed your bibliography and
+literature review, you will have developed valuable skills
+in finding resources and evaluating them efficiently and
+effectively.
+
+Prepare the literature review using \LaTeX\ and the
+\texttt{srpaper} document class with the \texttt{short}
+option.\index{literature review!formatting}
+See \namedref{Sections}{Section:LaTeXIntro},
+\ref{Section:LaTeXAnatomy}, and~\ref{Section:LaTeXDetails}
+for instructions.
+
+The literature review is due a few weeks before the semester
+ends. An approximate date appears in
+\namedref{Appendix}{Appendix:Schedule}; the exact date will
+be announced and posted. There will be cases 
+in which the Computer Science faculty requests clarification
+or elaboration of the literature review; there is a second
+date in \namedref{Appendix}{Appendix:Schedule} for the
+revision. As with the annotated bibliography, send copies
+of the literature review to
+your advisor and the instructor in charge of the Senior
+Seminar.\index{literature review|)}
+
+
+\section{Extended Abstract}
+\label{Section:ExtendedAbstract}
+\index{extended abstract|(}
+Along with the literature review, you will submit an extended
+abstract for your project. By the time 
+you have completed the background reading and thinking, 
+you should have a very concrete idea of your project.
+
+% Some of the language below is taken from Kim Bruce's email
+% to the CS majors on November 7, 2007.
+The extended abstract might also be called a ``research
+proposal.'' It is the sort of document that normally must be
+approved by supervisors (either in academia or industry) before
+a research project is undertaken, although in our case it is
+significantly shorter.  It will be a separate document,
+about two or three paragraphs long, which describes the
+specific goals and strategies for the project. It should
+tell the reader
+\begin{itemize}
+\item what question you intend to answer,
+\item what you plan to do over the course of the project, and
+\item how you plan to draw conclusions from your work.
+\end{itemize}
+You may plan to write code, conduct
+an experiment, prove a theorem, design a system or a
+language, or study the development of an idea. Whatever you
+plan to do, be sure to include a strategy (including,
+usually, the collection of data) that will lead to a 
+solid conclusion.
+Be sure to describe techniques for statistical analysis of
+your data if it is appropriate for your subject, as it will
+be, for example, if you are measuring the performance of a
+program or computer system.
+
+Once approved, you should think of this as a contract
+between you and your advisor.  Although it may be revised
+over time, it will guide the evaluation of your project.
+Even though it is only a page long, you should think
+carefully about what goes into it and discuss it thoroughly
+with your advisor.
+
+Like the literature review, the extended abstract is to
+be prepared with the \texttt{srpaper} document class
+using the \texttt{short} option.%
+\index{extended abstract!formatting}
+See \namedref{Sections}{Section:LaTeXIntro},
+\ref{Section:LaTeXAnatomy}, and~\ref{Section:LaTeXDetails}
+for instructions.
+
+The extended abstract is due at the same time as the 
+literature review. The approximate due dates for the
+abstract and, if necessary, the revision appear in
+\namedref{Appendix}{Appendix:Schedule}. Send copies of
+the extended abstract to your advisor and the instructor
+in charge of the Senior Seminar.%
+\index{extended abstract|)}
+
+
+\section{Scheduling}
+\label{Section:Scheduling}
+\index{scheduling|(}
+Naturally, the largest part of your effort will go into the
+execution of the project or thesis. Because the projects are
+so different from one another, there is little we can offer
+in the way of general direction. You and your
+advisor\index{advisor!role of} will
+decide the course of the project. In the spring semester,
+you will work closely, and meet regularly, with your advisor
+to set intermediate goals, review progress, and solve any
+problems that arise. You will also attend group meetings,
+approximately monthly, to share news about progress,
+difficulties, and successes with your fellow students.
+
+It is vitally important that you maintain a realistic
+schedule. Begin work right away, and try to make real
+progress in the first month. With your advisor, set
+intermediate goals and review the schedule frequently. As
+you work, some tasks will take more time than you expect and
+others (a few) may take less. Build into your schedule some
+slack for the ``slippages'' that always occur, and allow
+enough time for preparing the presentation and writing the
+paper.
+
+Throughout your work, remember Hofstadter's
+Law~\cite{HofstadterGEB}. We are grateful to Jim Marshall
+for directing us to this fundamental truth of the universe.
+\index{Hofstadter's Law}
+\begin{quote}
+\textbf{Hofstadter's Law:} It always takes longer than you
+expect, even when you take into account Hofstadter's Law.
+\end{quote}\index{scheduling|)}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Chapter: Presentation
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Presentation}
+\label{Chapter:Presentation}
+\index{presentation|(}
+The project presentations occur late in the spring
+semester. Each student will give a presentation on one of 
+the dates listed in
+\namedref{Appendix}{Appendix:Schedule}; the exact times
+and places will be announced. Each student will have
+30~minutes: 20~minutes for the presentation and 
+10~minutes for questions.
+
+
+\section{Planning and Rehearsal}
+\index{presentation!rehearsing|(}
+A good presentation requires careful planning and
+judgment. Your intended audience is the group of Computer
+Science majors from the junior and senior classes, but
+remember that those people have not spent the last few
+months intensely involved with your project. Think about how
+to introduce your work: what to include and what to omit.
+
+In 20~minutes, you cannot say everything. It is acceptable,
+often highly desirable, to concentrate on just one aspect of
+your project. Be sure that you provide a clear statement of
+the problem and, later in the talk, a clear conclusion. Give
+enough important details so that the audience has an
+appreciation of your work but not so many that they become
+numb.
+
+At the end of the talk, audience members should appreciate
+the central ideas and lines of reasoning in your
+project. Ideally, they will feel that they could, if they
+wanted, fill in the details for themselves.
+
+Once you have an outline, it is time to begin
+rehearsing. Practice speaking out loud, while you are
+standing up, preferably with someone listening. You will
+discover that the presentation takes longer when you
+rehearse it in semi-realistic circumstances than when you
+whisper it to yourself. You will also discover the points
+for which you do not (yet) have good explanations. You are
+likely to revise your outline radically after one or two
+rehearsals.
+
+After you have established the outline, it is time to refine
+the actual presentation. Work to overcome any bad speaking
+habits. Avoid speaking too softly or too quickly. Speak
+clearly and project to the rear of the room. Maintain eye
+contact with various members of the audience. Develop a
+relaxed but authoritative conversational tone. Again,
+several rehearsals---while you are standing and speaking
+aloud to another person---are essential.
+
+You may want to rehearse before a video camera and evaluate
+your performance.\index{video equipment}
+If so, your advisor\index{advisor!role of} can arrange to
+borrow video equipment from ITS.%
+\index{presentation!video|see{video equipment}}
+\index{presentation!rehearsing|)}
+
+
+\section{Visual Aids}
+\index{presentation!slides|(}
+Most students will use some kind of visual aid. Slides of
+the Powerpoint variety are most common, but other creative
+kinds of demonstrations are welcome.
+
+Keep in mind that at least half of your audience's attention
+will be on the visual image and not on what you are
+saying. Choose slides or other demonstrations to supplement
+your words. If you have a chart, illustration, or animation
+that requires some attention, allow the audience time to
+absorb it. In the case of an animation or film clip,
+particularly, a few seconds of silence from you will be
+appreciated.
+
+Most experts suggest that a slide should appear for at least
+one full minute. Slides with charts, tables, diagrams, or
+illustrations may need more explanation and should be
+displayed longer. This means that your 20-minute
+presentation should have \emph{at most} 20~slides and
+perhaps significantly fewer. The rule is not absolute, and
+you are free to include more slides as long as you do it
+consciously and for a good reason.
+
+Unless your slide contains a particularly pithy quotation,
+do not read from it. Find other words to amplify the idea or
+give additional perspective. Above all, \emph{do not read
+  bullet points on a slide.}
+
+When they are done well, visual aids greatly enhance a
+presentation. Take the time to prepare effective visual
+aids.\index{presentation!slides|)}
+
+
+\section{Logistics}
+\index{presentation!setting up|(}
+To avoid unpleasant surprises, practice in the actual room
+with the actual audio-visual equipment shortly before your
+presentation. Make no assumptions! It is possible that
+someone will change the settings of the equipment or erase
+your file from the computer a few hours before the
+presentation. Be prepared for the network to go down just
+minutes before you begin.
+
+Some students will have specialized computer demonstrations
+that require some work to set up. Please help us to make the
+transitions between speakers smooth and fast. Speak to the
+people who will appear before and after you and decide how
+you will make the shift from one person to the next. Do as
+much of the preliminary work as you can before the
+presentations begin on that day. If you have very special
+needs, your presentation can be scheduled first (or
+immediately after a break) to allow time to get ready.%
+\index{presentation!setting up|)}
+\index{presentation|)}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Chapter: Prose
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Prose}
+\label{Chapter:Prose}
+If you are following the project or research thesis option,
+this chapter is for you. It describes the paper or thesis
+that will be the permanent record of your work. The written
+work is a big part of your senior exercise. A hard copy will
+be archived in the Computer Science Department, and
+electronic copies will appear on the department web site.
+
+If you are following the clinic option, you may skip this
+chapter. The written work is also a big part of your effort,
+but you and your teammates will write a report that follows
+the specifications of the Harvey Mudd College Computer
+Science Clinic.
+
+
+\section{Content}
+\label{Section:Content}
+\index{paper and thesis|(}
+The purpose of the paper\footnote{To avoid the cumbersome
+  phrase ``project paper or research thesis,'' we use the
+  word ``paper'' to refer generically to the written work.}
+is to explain the endeavor: its background, its goals, and
+its outcome. Normally, there will be an introductory
+chapter, a background chapter (which was drafted as the
+literature review in the fall semester), one or more
+chapters that describe the results and observations, and a
+conclusion. Often there will be a section on ``lessons
+learned'' or ``future work.'' The actual organization will
+be determined by the nature of the work. Discuss the
+structure of your paper with your
+advisor\index{advisor!role of}.
+
+Concentrate on the \emph{results} and use them to guide the
+organization of the paper. Once you know where you are
+going, you can start at the beginning with the historical
+material and make your way to your conclusion. Write clearly
+and specifically. Know what you want to say before you begin
+to write. Have a concrete conclusion, and include any 
+details you need to support it. Present specifications,
+derivations, and statistical analyses whenever they are
+appropriate. Avoid vague generalities. Set aside time
+for composition. It takes work to explain a technical topic
+clearly and economically.
+
+The paper should be written for other Computer Science
+majors: people who have a solid background in the subject
+but who may not know anything about the specific topic. It
+is especially difficult for someone who has been working on
+a topic for months to back off and write about the most
+basic and general facts. The introduction, particularly,
+will require patient writing and rewriting to explain the
+context without being tedious or long-winded.
+
+Many students ask, ``How long must a project paper be?''%
+\index{paper and thesis!length} The
+answer is, ``Not one word longer---or shorter---than it
+takes to explain the background, the project, and the
+results.'' It depends on the subject. If the project is
+expository or formulates concepts, the paper will be
+longer. If the project's goal is to create something, like a
+program or a robot, then the paper may be shorter. Most
+project papers are between 20 and 50 pages of text, not
+counting the front matter, appendices, and
+bibliography. (For comparison, this guide has
+\plainpageref{EndOfText}~pages of text.) A typical research
+thesis is longer, but there is a wider variation among
+theses.
+
+Programs or program fragments \emph{may} appear in a paper
+if they are necessary for the exposition. Often, however,
+you can make your point just as clearly by using
+pseudo-code---or without reference to code at all.  A full
+code listing is not required, even though we illustrate one
+in \namedref{Appendix}{Appendix:Source}.  In some cases an
+advisor will ask that the code be submitted separately from
+the paper.
+
+Most papers and theses will not contain a diary of daily
+progress.  There is seldom a need for a chronography of what
+you did each day. The reader is interested in what you
+learned and why, and not in a play-by-play description of
+how you did it. There are a few instances, however, in which
+the direct experience is crucial---in projects that explore
+techniques of software engineering, for example---and if
+yours is such a project, you should describe the process.
+
+
+\section{Form}
+\label{Section:Form}
+\index{paper and thesis!form|(}
+Your final document will be formatted like this guide. Most
+of the remainder of this chapter describes how to do it. We
+will use a customized style in the \LaTeX\ document
+preparation system. You will have only a few decisions about
+the format of the paper so that you may concentrate on the
+prose and the
+content.
+
+We expect good composition, correct spelling, and proper
+punctuation. Use a style manual whenever there is any
+question. You probably have one from your \emph{Critical
+Inquiry} course in your first year, either
+\cite{DHackerReference} or \cite{DHackerRules} by Diana
+Hacker. \textit{The Elements of Style} \cite{StrunkWhite} by
+Strunk and White is another standard style guide. The
+\textit{Chicago Manual of Style} \cite{ChicagoStyle} is
+comprehensive, scholarly, and authoritative. \textit{A
+Handbook for Scholars} \cite{HandbookForScholars} is a
+shorter work that is widely used by computer scientists, and
+the anthology \textit{Mathematical Writing}
+\cite{KnuthMathWriting} has many good
+suggestions. Familiarize yourself with some of these books
+before you begin writing.
+
+Find someone else---perhaps several people---to help you
+with proofreading throughout the writing process. Have
+someone read an early draft to show you where you are not
+clear. Later, have someone read a nearly-final draft to
+catch mechanical errors.
+
+Use a spell-checker.\index{spell check}
+The program \texttt{ispell} is
+installed on the Computer Science cluster, and it can be
+accessed from inside \texttt{emacs} where it will avoid many
+of the \TeX-isms. Other systems have similar tools.
+
+Be sure to give credit for previous work and to cite sources
+correctly.  Most likely, you will have citations throughout
+your paper, and in particular, the background chapter will
+be dense with citations. The style of citation is described
+below, in \namedref{Section}{Subsection:Citations}.
+
+When you are finally finished, please send copies of the
+completed paper to your advisor and to the instructor in
+charge of the senior exercise by the announced due date.%
+\index{paper and thesis!form|)}%
+\index{paper and thesis|)}
+
+
+\section{A Brief Introduction to \LaTeX}
+\label{Section:LaTeXIntro}
+\index{latex@\LaTeX|(}
+\LaTeX\ is a typesetting system that produces sophisticated
+documents. It can be very complicated, but we have tried to
+keep the details from becoming bothersome. It is a good
+idea, though, for you to become familiar with the system
+early in the writing process.
+
+\subsection{Sample Files}
+The directory \texttt{/common/cs/senior-exercise/latex}%
+\index{sample files}
+contains a number of files that you will find helpful.
+\begin{itemize}
+\item
+The file \texttt{srpaper.cls}%
+\index{srpaper class@\texttt{srpaper} class!class file}
+defines the format for
+the senior paper; you must place a copy of it in your
+working directory. Should you want to investigate the
+inner workings of the format, however unlikely that
+may be, see \texttt{srpaper-doc.pdf}%
+\index{srpaper class@\texttt{srpaper} class!documentation}
+for the annotated source.
+\item
+For the annotated bibliography, the file
+\texttt{annbib-template.tex}%
+\index{annotated bibliography!sample files}%
+\index{sample files!annotated bibliography}
+is the place to start. It gives
+you the general framework for the annotated bibliography.
+\item
+For your paper or thesis, the file
+\texttt{srpaper-template.tex}%
+\index{sample files!paper template}
+is a place to start. It gives
+you the general framework for a \LaTeX\ file.
+\item
+The source to this document is \texttt{srexercise.tex}.
+It provides examples of many of the constructions that
+you will encounter.
+\item
+The file \texttt{srpaper-sample-biblio.bib}%
+\index{annotated bibliography!sample files}%
+\index{sample files!annotated bibliography}
+is the
+bibliography file for this document. It has examples of most
+of the kinds of citations, including annotations, that you
+will want to use.
+\end{itemize}
+
+\subsection{Resources}
+\label{Subsection:References}
+\index{latex@\LaTeX!references}
+The standard reference for \LaTeX\ is~\cite{Lamport1994},
+which also contains a good introduction to \BibTeX. A
+deeper look is provided by~\cite{Companion}. For low-level
+details, see the original description~\cite{Knuth1984} of
+\TeX\ by Knuth. Links to on-line resources and other books
+can be found at the following sites:
+\begin{indented*}
+\url{http://www.dci.pomona.edu/docs/tex-dci.html}\\
+\url{http://www.latex-project.org}\\
+\url{http://www.tug.org}
+\end{indented*}
+If you are planning to write on a computer other than 
+one in the Computer Science cluster, you may want to 
+look at the following site which contains information
+about using \LaTeX\ on Windows and Macintosh computers.
+\begin{indented*}
+\url{http://www.dci.pomona.edu/docs/tex.html}
+\end{indented*}
+
+There are products, some of them
+free, that ease the burden of processing and viewing
+\LaTeX\ documents. You may want to investigate them.
+
+\subsection{Running \LaTeX}
+\index{latex@\LaTeX!running}
+Some people execute \LaTeX\ in a terminal window,
+as described below. Others prefer to use an interface
+program. The Macintosh computers in the Computer Science
+Laboratories have an easy-to-use interface program called
+TeXShop. If you want to install your own system, there are
+several different packages for each of the popular
+operating systems. They should all produce identical
+documents.
+
+If you are new to \LaTeX, start by recreating this
+document. On the Computer Science systems, copy these five
+files into the directory where you plan to keep your
+paper.\index{srpaper class@\texttt{srpaper} class!class file}%
+\index{sample files!this document}
+\begin{code}
+srexercise.tex
+srpaper.cls
+srpaper-sample-biblio.bib
+pclogo-4c-noborder.pdf
+\end{code}
+Then simply type the command below.
+\begin{code}
+pdflatex srexercise
+\end{code}
+You will create a PDF file named
+\texttt{srexercise.pdf}.
+If you are working on another system, the process may
+be a little different.
+
+To begin your own annotated bibliography,
+\index{annotated bibliography!formatting}%
+\index{bibtex@\BibTeX!running} start with the
+file \texttt{annbib\discretionary{-}{}{-}template.tex}.%
+\index{annotated bibliography!template} Copy
+it into your working directory, rename it, and edit it. Then
+use the commands \texttt{pdflatex}, \texttt{bibtex}, and
+\texttt{pdflatex} (twice) to create the first draft of your
+bibliography. See \namedref{Sections}{Subsection:Citations}
+and~\ref{Subsection:Bibliographies} for more information on
+citations and bibliographies in \LaTeX.
+
+To begin your own literature review or paper,
+\index{literature review!formatting} start with the
+file
+\texttt{srpaper\discretionary{-}{}{-}template.tex}%
+\index{sample files!paper template}. Copy it
+into your directory, rename it, and edit it. Then use the
+command \texttt{pdflatex} to create the first draft.
+
+
+\section{Anatomy of a \LaTeX\ File}
+\label{Section:LaTeXAnatomy}
+A \LaTeX\ file can be created in any text editor. It is
+best, however, to use an editor that saves the file as plain
+text. We suggest that you avoid word processors because they
+often insert formatting information and non-standard
+characters.
+
+The comment character is the percent sign \verb|%|. 
+A comment extends to the end of the current line. 
+
+You may want to follow along with the template or the
+source of this document as you read the following
+descriptions of the parts of a file.
+
+\subsection{The Class and Package Specifications}
+\label{Subsection:ClassAndPackage}
+The first non-comment line of a \LaTeX\ file is the
+\texttt{documentclass} specification. There are standard
+classes, including \texttt{article}, \texttt{letter},
+\texttt{report}, and \texttt{book}. We will use a custom
+version called
+\texttt{srpaper}.%
+\index{srpaper class@\texttt{srpaper} class!class file}
+\begin{vcode}
+\documentclass[draftcopy]{srpaper}
+\end{vcode}
+The options appear between the brackets. Here,
+\texttt{draftcopy} is the only one.  For your final copy,
+you \emph{must} change \texttt{draftcopy} to
+\texttt{finalcopy}. That will change the pagination so that
+sections start on right hand pages and remove the header
+``Draft of $\langle$\textsf{date and time}$\rangle$.'' See
+\namedref{Section}{Subsection:Options} for the other options
+that are available.
+
+After the class specification comes the (optional) package
+specifications. The packages add additional features to
+\LaTeX\ and control the appearance of the output. Here are
+the specifications for two common packages which are used in
+the creation of this document.
+\begin{vcode}
+\usepackage{url}
+\usepackage{graphicx}
+\end{vcode}
+As you write, you may want to add other packages to the
+list. See \namedref{Sections}{Subsection:Packages}
+and~\ref{Subsection:FormattingPrograms} for some commonly
+used packages. Do not, however, do anything to change the
+style or organization specified by \texttt{srpaper}.
+
+\subsection{The Front Matter}
+The \texttt{srpaper}%
+\index{srpaper class@\texttt{srpaper} class!front matter}
+class automatically produces a title
+page, abstract, and table of contents, plus optional
+acknowledgments, list of figures, and list of
+tables. The specifications for this material appears right
+after the class and package specifications.
+
+The date must be of the form ``Month dd, yyyy.'' The name(s)
+of your advisors\index{advisor!title page format} must be
+followed with a comma and either ``advisor'' or
+``advisors,'' as appropriate.
+
+Here is a minimal example of the front matter specification,
+with title, author, date, advisor, and abstract. When the
+acknowledgment is missing or empty, as it is here, the
+acknowledgment page will not appear.
+\begin{vcode}
+\title{A Guide through the Senior Exercise}
+\author{Everett L. Bull, Jr.}
+\date{July 10, 2006}
+\advisor{Professors Kim Bruce, Tzu-Yi Chen,
+    and Sara Sood, advisors}
+\abstract{A senior exercise ... }
+\acknowledgment{}
+\end{vcode}
+
+\subsection{The Body}
+Most of your paper will be ordinary text---just type it
+normally between the delimiters \verb|\begin{document}| and
+\verb|\end{document}|. The first line after
+\verb|\begin{document}| must be \verb|\frontmatter| to 
+get the title page, table of contents, and other preliminary
+material. A blank line divides paragraphs.
+
+\subsubsection*{Punctuation}
+\index{latex@\LaTeX!punctuation}
+The most common punctuation marks---commas, colons, question
+marks, and the like---can be typed on the keyboard. Two
+matters of punctuation deserve mention, though. Quotation
+marks require two keystrokes each: a pair
+\texttt{\symbol{'022}\symbol{'022}} of grave accents to open
+the quotation and and a pair
+\texttt{\symbol{'015}\symbol{'015}} of apostrophes to close
+it. Do not use the double quotation mark \texttt{"} from the
+keyboard. Some editors, including some configurations of
+\texttt{emacs}, will automatically translate the double
+quotation mark.
+
+The keystroke \verb|-| produces a hyphen, the punctuation
+mark used to break words across line boundaries and to
+construct compound words like ``user-friendly.'' Two hyphens
+produce an en dash, used in ranges like ``pages~29--47'' and
+2006--2007. Three hyphens produce an em dash---the
+punctuation mark used to set off or emphasize clauses. In
+math mode, a single hyphen produces a minus sign.
+
+The keystroke \verb|~| produces a non-breaking space. It is
+exactly like a normal inter-word space, except that a
+line-break will not occur at that point. It is normally used
+to connect a name and a number, as in \verb|page~47|.
+
+\LaTeX\ offers a full range of punctuation marks and
+accents; see the \LaTeX\ documentation for details.
+
+\subsubsection*{Fonts}
+For \emph{emphasis,} use the \verb|\emph| command:
+\begin{code}
+For \verb|\emph{emphasis,}| use \ldots
+\end{code}
+To use italics for other purposes, the titles of books for
+example, use the font-changing command \verb|\textit|:
+\begin{code}
+Brooks wrote \verb|\textit{The Mythical Man-Month}| \ldots
+\end{code}
+\namedref{Table}{Table:FontChanges} shows the other commands
+for changing the shape or weight of the font.
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textit{italics}     & \verb|\textit| \\ \hline
+\textbf{bold}        & \verb|\textbf| \\ \hline
+\textsf{sans serif}  & \verb|\textsf| \\ \hline
+\texttt{mono-spaced} & \verb|\texttt| \\ \hline
+\end{tabular}
+\end{center}
+\caption[Font-changing Commands]{The standard
+  \LaTeX\ font-changing commands.}
+\label{Table:FontChanges}
+\end{table}
+
+\subsubsection*{Sectioning}
+Use the directives \verb|\chapter|, \verb|\section|, and
+\verb|\subsection| to organize your paper.
+\begin{vcode}
+\subsection{The Body}
+Most of your paper ...
+\end{vcode}
+There are also subsubsections, paragraphs, and
+subparagraphs.  To suppress the automatic numbering, put an
+asterisk after the directive. The heading above was created
+with \verb|\subsubsection*{Sectioning}|.
+
+
+\section{Further Details about \LaTeX}
+\label{Section:LaTeXDetails}
+We do not give a comprehensive description of
+\LaTeX. Instead, this section touches on some of the
+problems you are likely to encounter and gives hints at
+their solutions. See the references mentioned in
+\namedref{Section}{Subsection:References} for more detailed
+information.
+
+\subsection{Options}
+\label{Subsection:Options}
+\index{srpaper class@\texttt{srpaper} class!options|(}
+The options to the \texttt{srpaper}
+class appear, separated
+by commas, between the brackets in the \verb|\documentclass|
+declaration. Here are the possible options for the class.
+\begin{description}
+\item[\texttt{finalcopy} \textnormal{and}
+  \texttt{draftcopy}] control the pagination. With the
+  \texttt{finalcopy} option, the text is single spaced with
+  each section starting on a right-hand page. The
+  \texttt{draftcopy} option avoids blank pages by not
+  skipping left-hand pages and puts a heading ``Draft of
+  $\langle$\textsf{date and time}$\rangle$'' at the top of
+  each page. Only one of the two options may be used. The
+  default is \texttt{finalcopy}.
+\item[\texttt{short}] is used for short papers and
+  fragments. Use it, for example, when you are asked to
+  submit ``one chapter'' of your paper. It omits most of the
+  front matter, provides a simple title, and does not start
+  a chapter on a new page.
+\item[\texttt{singlespace}\textnormal{,}
+  \texttt{onehalfspace}\textnormal{, and}
+  \texttt{doublespace}] control the inter-line spacing. As
+  the names indicate, \texttt{onehalfspace} and
+  \texttt{doublespace} increase the vertical distance
+  between lines of text. The
+  front matter is always single-spaced. The
+  \texttt{onehalfspace} and \texttt{doublespace} options
+  also make the side margins smaller---and the lines
+  correspondingly wider.  Only one of the three options may
+  be used. The defaults are \texttt{doublespace} for
+  \texttt{draftcopy} and \texttt{singlespace} for
+  \texttt{finalcopy}.
+\item[\texttt{lof} \textnormal{and} \texttt{nolof}]
+  determine the presence of a list of figures. Only one of
+  the two options may be used, and both are ignored in the
+  presence of \texttt{short}. The default is \texttt{lof}.
+\item[\texttt{lot} \textnormal{and} \texttt{nolot}]
+  determine the presence of a list of tables. Only one of
+  the two options may be used, and both are ignored in the
+  presence of \texttt{short}. The default is \texttt{lot}.
+\item[\texttt{cm} \textnormal{and} \texttt{mathtime}] are
+  the font options. The \texttt{cm} option gives the
+  standard Computer Modern fonts for \TeX. The
+  \texttt{mathtime} option gives Times Roman text with
+  matching math fonts. Special files are required for
+  \texttt{mathtime}; see below. Only one of the two options
+  may be used. The default is \texttt{cm}. If you choose
+  the Times Roman fonts, you must copy all the files from
+  the directory
+  \url{/common/cs/senior-exercise/latex/belleek}
+  into your working directory.
+\end{description}
+The documents submitted to the department must be created
+with the \texttt{finalcopy} option.%
+\index{srpaper class@\texttt{srpaper} class!options|)}
+
+\subsection{Packages}
+\label{Subsection:Packages}
+\index{latex@\LaTeX!packages}
+There are more packages for \LaTeX\ than you can imagine,
+and you will find some of them useful. You can ``use'' them
+at the top of your file, with the \verb|\usepackage|
+declaration, as described in
+\namedref{Section}{Subsection:ClassAndPackage}. You are free to
+use any package you like, as long as it does not change the
+overall appearance as defined in the \texttt{srpaper}
+class. We describe a few examples of packages here and some
+others in \namedref{Section}{Subsection:FormattingPrograms}.
+
+The \texttt{graphicx} package gives you the ability to
+include graphics.\index{latex@\LaTeX!graphics} See
+\namedref{Section}{Subsection:Graphics}. The
+\texttt{graphicx} package is used in this document.
+
+The \texttt{url}\index{latex@\LaTeX!formatting urls}
+package adds the facility to format
+url's. The \texttt{url} package is also used in this
+document. 
+
+The \texttt{verbatim}%
+\index{latex environments@\LaTeX\ environments!verbatim@\texttt{verbatim}}
+package adds the ability to include a
+file ``verbatim''---in typewriter font. It is useful for
+code listings, as in 
+\namedref{Appendix}{Appendix:Source}. One can
+even call in a source code file without retyping or cutting
+and pasting.  The \texttt{alltt}%
+\index{latex environments@\LaTeX\ environments!alltt@\texttt{alltt}}
+package is a variant on
+\texttt{verbatim} that is a little more flexible. It uses
+the typewriter font and respects line breaks, but it allows
+some of \LaTeX's formatting capability. Both
+\texttt{verbatim} and \texttt{alltt} are automatically
+included by the \texttt{srpaper} class.
+
+The \texttt{amssymb} package adds many of the less-common
+mathematical symbols.%
+\index{latex@\LaTeX!mathematical notation}
+
+\subsection{Environments}
+\index{latex environments@\LaTeX\ environments}
+A \LaTeX\ environment is bracketed by the delimiters
+\verb|\begin{|\texttt{\textsf{envname}}\verb|}| and
+\verb|\end{|\texttt{\textsf{envname}}\verb|}|, where
+\textsf{envname} is the name of the environment.  A bulleted
+list is created with the \texttt{itemize} environment.%
+\index{latex environments@\LaTeX\ environments!itemize@\texttt{itemize}}%
+\index{latex@\LaTeX!bulleted lists}
+\begin{vcode}
+\begin{itemize}
+   \item This is the first item in the list.
+   \item This is the second.
+\end{itemize}
+\end{vcode}
+This code produces the list below.
+\begin{itemize}
+\item This is the first item in the list.
+\item This is the second.
+\end{itemize}
+A numbered list is created in the same way, except that the
+environment is named \texttt{enumerate}.%
+\index{latex environments@\LaTeX\ environments!enumerate@\texttt{enumerate}}%
+\index{latex@\LaTeX!numbered lists} The 
+\texttt{itemize} and \texttt{enumerate} environments may be
+nested within one another.
+
+Descriptions and glossaries are created with the
+\texttt{description} environment.%
+\index{latex environments@\LaTeX\ environments!description@\texttt{description}}
+The list of options in
+\namedref{Section}{Subsection:Options} was created with the
+\texttt{description} environment. The \texttt{quote}%
+\index{latex environments@\LaTeX\ environments!quote@\texttt{quote}}
+environment is handy for displaying indented blocks of
+text. The \texttt{center}%
+\index{latex environments@\LaTeX\ environments!center@\texttt{center}}
+environment does not create a list
+at all; it simply centers text on a line.
+
+There are four additional environments that are provided by
+the \texttt{srpaper} class. The environment
+\texttt{indented}%
+\index{latex environments@\LaTeX\ environments!indented@\texttt{indented}}
+simply displays a block of text with the
+left margin shifted to the right. The environment
+\texttt{indented*}%
+\index{latex environments@\LaTeX\ environments!indented*@\texttt{indented*}}
+does the same thing and single spaces the
+text. If the surrounding text is already single spaced, then
+\texttt{indented} and \texttt{indented*} behave identically.
+
+The environment \texttt{code}%
+\index{latex environments@\LaTeX\ environments!code@\texttt{code}}
+indents and shifts to the
+typewriter font. It is an \texttt{alltt} environment nested
+inside an \texttt{indented*} environment. The \texttt{vcode}%
+\index{latex environments@\LaTeX\ environments!vcode@\texttt{vcode}}
+environment is the same, except that the inner environment
+is \texttt{verbatim}. The fragment showing the
+\texttt{itemize} environment, above, is set using a
+\texttt{vcode} environment.
+
+\subsection{Formatting Programs}
+\label{Subsection:FormattingPrograms}
+\index{latex@\LaTeX!formatting programs|(}
+It is difficult to display programs and code fragments in an
+effective and pleasing way. The most common problems in
+\LaTeX\ are indentation, long lines, and reserved characters
+like \verb|{|, \verb|}|, and \verb|\|. See the source to
+this document for some simple examples of short blocks of
+code. The construction construction that produces
+\namedref{Figure}{Figure:Fibonacci} is particularly awkward
+because we want the code centered in the figure.
+\begin{figure}
+%
+% A note on the "awkward construction":
+%
+% The trick here is to create the displayed material and
+% then center it. We do this by putting it inside a
+% tabular environment and switching explicitly to the
+% monospaced font. With the code, vcode, or verbatim
+% environments, the program would be left-justified
+% instead of centered.
+%
+\begin{center}\ttfamily
+\begin{tabular}{l}
+fun fib k = if k < 2 \\ \obeyspaces
+    then max(0,k)    \\ \obeyspaces
+    else fib (k-1) + (fib (k-2));
+\end{tabular}
+\end{center}
+\caption[The Fibonnaci function]{The Fibonacci function in ML.}
+\label{Figure:Fibonacci}
+\end{figure}
+
+For short fragments of code, you can use the \texttt{alltt}
+or \texttt{verbatim} environments, or their indented
+counterparts \texttt{code} and \texttt{vcode}. For longer
+programs, say a full listing in an appendix, the
+\verb|\verbatiminput| command from the \texttt{verbatim}
+package is handy. For an example, see
+\namedref{Appendix}{Appendix:Source}.
+
+If you have formatting problems, you might look at the
+packages \texttt{alg}, \texttt{algorithmic},
+\texttt{fancyvrb}, and \texttt{listings}. The last of these
+appears to parse the programming language and format it
+accordingly.\index{latex@\LaTeX!formatting programs|)}
+
+\subsection{Formatting Mathematics}
+\index{latex@\LaTeX!mathematical notation}
+\TeX\ and \LaTeX\ were originally created for typesetting
+mathematics. You can include formulas like $E=mc^{2}$ and
+displayed equations like
+\[
+   \frac{\pi}{4}=\sum_{i=0}^{\infty}(-1)^{i}\frac{1}{2i+1}.
+\]
+Look at the source for this document (in
+\namedref{Appendix}{Appendix:Source}) to see how these formulas
+were created. See \cite{Lamport1994}, \cite{Knuth1984}, and
+the on-line references for more about formatting
+mathematics.
+
+\subsection{Managing a Large Document}
+\chardef\bslash=`\\
+\newcommand{\cs}[1]{\texttt{\bslash{}#1}}
+It is cumbersome to maintain a large document in a single
+file. You may split up your paper into several sections,
+each one in a different file. Use the \verb|\input|
+directive to insert the contents of a file at
+the appropriate place.\footnote{We use plain \TeX's \cs{input}
+instead of the more sophisticated \LaTeX\ \cs{include}
+because the latter always starts a new page and can cause
+unwanted page breaks.} Frequently, there is a master file
+that contains only front matter and \verb|\input|
+directives.
+\begin{vcode}
+\input section4.tex
+\end{vcode}
+
+\subsection{Labels and References}
+\label{Subsection:LabelsAndRef}
+\index{latex@\LaTeX!cross references|(}
+\LaTeX\ labels provide an easy way to cross-reference
+material. Think of a label as an anchor. Inserting the
+directive \verb|\label{name}| at some point creates a
+reference to the material at that point and records the page
+number where it appears. The reference can be an item number
+in an enumerated list, a section or subsection number, or
+the number of a figure or table. Normally the \verb|\label|
+directive appears right after the declaration of the entity
+to which it refers. Figures and tables are a little
+different; the \verb|\label| appears at the end, after the
+caption.
+
+To use a label, simply type \verb|\ref{name}|, where
+``name'' is the name that was declared with the label. You
+will find it easiest, in the long run, to use descriptive
+names. To refer to a page, type \verb|\pageref{name}|.
+Obviously, there can be only one \verb|\label|
+declaration for a given name, but there can be many
+references to it.
+
+Here is an example that produces the sentence
+``Section~\plainref{Subsection:LabelsAndRef} begins on
+page~\plainpageref{Subsection:LabelsAndRef}.''
+\begin{vcode}
+\subsection{Labels and References}
+\label{Subsection:LabelsAndRef}
+...
+Section~\ref{Subsection:LabelsAndRef} begins on
+page~\pageref{Subsection:LabelsAndRef}.
+\end{vcode}
+Recall that the \verb|~| symbol is a non-breakable space 
+used to prevent a line break between the word ``Section''
+and the number that follows it.
+
+You may have to process the file twice before the labels are
+properly resolved. Pay attention to error messages and
+warnings about duplicate or non-existent labels.%
+\index{latex@\LaTeX!cross references|)}
+
+\subsection{Figures and Tables}
+\index{latex@\LaTeX!figures and tables|(}
+You will almost certainly want to use some sort of figure
+or table in your paper. The general framework is like
+this:%
+\index{latex environments@\LaTeX\ environments!figure@\texttt{figure}}
+\begin{code}
+\verb|\begin{figure}|
+\qquad \textrm{\ldots figure specification \ldots}
+\verb|\caption[|\textrm{short title, for the list of figures}\verb|]{|\textrm{text of caption}\verb|}|
+\verb|\label{Figure:Name}|
+\verb|\end{figure}|
+\end{code}
+The order is important: first the figure, then the caption,
+and finally the label.
+
+Tables are similar with the word \texttt{table}%
+\index{latex environments@\LaTeX\ environments!table@\texttt{table}}
+replacing
+\texttt{figure}. The material for a table is usually
+formatted with the \texttt{tabular} environment. The source
+for \namedref{Table}{Table:FontChanges} is a simple example.
+
+\subsubsection{Positioning Figures and Tables}
+\index{latex@\LaTeX!positioning figures and tables|(}
+Figures and tables are called ``floating matter'' because
+they float among the paragraphs of the text. \LaTeX's 
+algorithm for positioning floating matter is complicated
+and sometimes unpredictable. Often the figure or table 
+appears in an unwanted position.
+
+A small change to the text---even a line or two---can
+drastically change the placement of figures or tables.
+Do not worry about the positions of figures and tables
+until you are ready to produce the final copy. (But
+do leave yourself enough time at the end to attend to
+the details of visual formatting!)
+
+The first step in controlling placement is to use
+the placement option in the \texttt{figure} or
+\texttt{table} environment. The options are \texttt{t},
+\texttt{b}, \texttt{h}, and \texttt{p}, standing
+respectively for top, bottom, here, and ``on a
+separate page.'' The options appear in square brackets
+after the opening of the environment.
+\begin{code}
+\verb|\begin{figure}[t]|
+\end{code}
+Understand, however, that these options are merely
+suggestions; \LaTeX\ has a number of other constraints.
+Sometimes it will help to add an exclamation mark, as
+if to say ``I really mean it!''
+\begin{code}
+\verb|\begin{figure}[t!]|
+\end{code}
+If that does not solve the problem, there are stronger
+measures. Read about them in Chapter~6
+of~\cite{Companion}.%
+\index{latex@\LaTeX!positioning figures and tables|)}
+
+\subsubsection{Large Figures and Tables}
+\index{latex@\LaTeX!large figures and tables|(}
+You may find that your figure or table will not fit within
+the margins, especially when using the \texttt{finalcopy}
+option. In those rare cases, it is permissible to have
+a figure or table that is wider than the text. One easy
+way to accomplish that is to use the \texttt{adjustwidth}
+environment, available with the \texttt{changepage}%
+\index{latex environments@\LaTeX\ environments!changepage@\texttt{changepage}}
+package. Look for the \texttt{changepage} documentation
+if you have a need for it.
+
+A more drastic step is to print a wide table in 
+landscape mode on a page by itself. The \texttt{rotating}%
+\index{latex environments@\LaTeX\ environments!rotating@\texttt{rotating}}
+package provides commands \verb|\sidewaysfigure| and
+\verb|\sidewaystable|.%
+\index{latex@\LaTeX!large figures and tables|)}%
+\index{latex@\LaTeX!figures and tables|)}
+
+\subsection{Graphics}
+\label{Subsection:Graphics}
+\index{latex@\LaTeX!graphics|(}
+Very likely, you will want to include pictures or diagrams
+in your paper. You can do that with the \texttt{graphicx}
+package. The Pomona College logo was included in
+\namedref{Figure}{Figure:PCLogo} with the command
+\begin{vcode}
+\includegraphics[width=0.5in]{pclogo-4c-noborder.pdf}
+\end{vcode}
+For \texttt{pdflatex}, the external graphics files must be
+PDF files. You will need to convert other kinds of graphics
+to PDF. Other variants of \LaTeX\ allow other types of
+files.
+\begin{figure}
+\begin{center}
+\leavevmode
+\includegraphics[width=0.5in]{pclogo-4c-noborder.pdf}
+\end{center}
+\caption[The Pomona College logo]{The Pomona College logo,
+  as an example of included graphics.}
+\label{Figure:PCLogo}
+\end{figure}
+The book \cite{GraphicsCompanion} is a comprehensive
+reference for graphics in \LaTeX.%
+\index{latex@\LaTeX!graphics|)}
+
+\subsection{Footnotes and Citations}
+\label{Subsection:Citations}
+Footnotes\index{latex@\LaTeX!footnotes} are created with
+\verb|\footnote|.\footnote{Remember, though, that footnotes
+  are distracting. Work to minimize the number of them.}
+For the senior paper we do not use footnotes or
+endnotes for citations.%
+\index{latex@\LaTeX!citations}%
+\index{bibtex@\BibTeX!citations}
+ Rather, the citations are given in
+the text in brackets. You generate a citation with
+\verb|\cite{key}|, where \texttt{key} is a name for the work
+cited. Here are a few examples of using \verb|\cite|.
+\begin{code}
+In\verb|~\cite{Cpp}|, Stroustrup defined the language \ldots
+Stroustrup\verb|~\cite{Cpp}| defines the language \ldots
+The language C++ was defined by Stroustrup\verb|~\cite{Cpp}|.
+\end{code}
+The result is the following.
+\begin{indented}
+In \cite{Cpp}, Stroustrup defined the language \ldots \\
+Stroustrup~\cite{Cpp} defines the language \ldots \\
+The language C++ was defined by Stroustrup~\cite{Cpp}.
+\end{indented}
+Remember that a citation at the end of a sentence goes
+\emph{before} the punctuation.
+
+\subsection{Bibliographies}
+\label{Subsection:Bibliographies}
+\index{bibtex@\BibTeX|(}
+\index{latex@\LaTeX!bibliography|(}
+The citation keys are associated to books and articles in a
+bibliography file. The file 
+\texttt{srpaper-sample-biblio.bib} is an example of such a
+file. Here is a typical entry in that file.
+\begin{vcode}
+@book{Cpp,
+  author = "Bjarne Stroustrup",
+  title = "The {C++} Programming Language",
+  edition = "third",
+  year = 1997,
+  publisher = "Addison-Wesley",
+  annotate = "The bible for a complex programming
+              language. A required reference book
+              for anyone doing serious C++ programming."
+}
+\end{vcode}
+The entry describes the book corresponding to the key
+\texttt{Cpp}.  Keys are not case-sensitive. The entry
+provides the usual bibliographic information. The sample
+file contains example entries for articles and other kinds
+of documents.
+
+The fields in a bibliographic entry are determined by the
+bibliographic style you are using---a choice has been made
+for you by the \texttt{srpaper} class. If you add fields of
+your own creation, they will be silently ignored. Look at
+the examples, or ask your advisor, if you have an item that
+is not accommodated by the standard fields.
+
+The entries in a bibliography are formatted automatically by
+\LaTeX\ and \BibTeX. All you have to do is provide
+the information in the correct form. The content of the
+\texttt{annotate} field is displayed when you create an
+annotated bibliography but not when you create an ordinary
+bibliography. (Technical detail: If you wish to have
+multi-paragraph annotations, you must use \cs{par} to create
+paragraph breaks.) See the samples files
+\texttt{annbib-template.tex} and
+\texttt{srpaper-template.tex}.
+
+As you will see in the sample documents, the
+\texttt{srpaper} class provides two commands for creating
+bibliographies. The command \verb|\bibliography| creates an
+ordinary bibliography, like the one at the end of the
+document. The \texttt{annotate} field is ignored. The
+command \verb|\annotatedbibliography| includes the
+annotations, as in the sample \texttt{annbib-template.tex}.
+
+Only the works that you cite in the document will appear in
+the bibliography. Although some style guides will tell you
+that a bibliography must contain \emph{only} cited works, it
+is sometimes desirable to include works that are not
+cited. The annotated bibliography is an example of such a
+case. To include a single work that is not cited use a
+command like the following somewhere in the document.
+\begin{vcode}
+\nocite{MythicalManMonth}
+\end{vcode}
+To include \emph{all} the works in a bibliography file, use
+the wild-card command.
+\begin{vcode}
+\nocite{*}
+\end{vcode}
+
+The process for connecting a document to a bibliography is a
+little involved. First process the document with
+\texttt{pdflatex}. Then process the document again with
+\texttt{bibtex}. Then run \texttt{pdflatex}
+again---twice. The idea is that \LaTeX\ gathers the keys for
+a citation on the first run. Then \BibTeX\ takes the
+keys and formats the matching bibliography entries. \LaTeX\
+collates the entries on the second run and gets everything
+right on the third. If you ever add a citation or change the
+entry in the bibliography file, you have to repeat the
+cycle.
+
+Whenever possible, refer to published journals and not to
+web pages. If the web page is all you have, use the format
+of \cite{AKS2002}. (Interestingly, that link is no longer valid.
+It illustrates the problems with changing web sites.)
+If a published paper is also available on
+the web, it is helpful to include the url---as was done in
+\cite{AKS2004}.%
+\index{bibtex@\BibTeX|)}
+\index{latex@\LaTeX!bibliography|)}
+
+\subsection{Warnings and Error Messages}
+\index{latex@\LaTeX!warnings}
+\index{latex@\LaTeX!errors}
+The messages that \LaTeX\ displays as it runs are not always
+obvious, but you can usually decipher them. There is also a 
+log file, with the extension \texttt{.log} that contains even
+more information.
+
+The most common issues are overfull or underfull boxes and
+missing or duplicate labels. A box that is overfull by a tiny
+amount is perhaps not a problem, but one that runs off the
+page is unacceptable. All labels and citations should be
+correctly resolved.
+
+When you are preparing a final copy to submit, pay attention
+to the warnings. Look carefully
+at the document and find the text that produced a warning. Make
+adjustments so that the paper appears exactly as you want it.%
+\index{latex@\LaTeX|)}%
+% A trick to get the total number of pages of text, excluding
+% front matter and appendices.
+\label{EndOfText}
+
+% Add the following to put more examples in the bibliography.
+\nocite{*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Appendix: Schedule
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\chapter{Sequence of Events}
+\label{Appendix:Schedule}
+\index{calendar|(}
+\index{scheduling|(}
+Precise due dates will be announced in the Senior Seminar,
+over e-mail, and on the departmental web site. You are
+responsible for knowing about---and meeting---the various
+deadlines. The general schedule below is provided to help
+you plan and balance your workload during the senior year.
+
+There will be a few students who graduate in September or
+December and cannot follow the usual schedule. Those
+students will meet individually with the faculty and create
+alternate timelines.
+
+
+\section*{Junior Year}
+Students should obtain permission for the research thesis
+option or the clinic option early in the second semester.
+
+
+\section*{Senior Year, Fall Semester}
+The tasks to be completed in the fall semester are part of
+the Senior Seminar. The fall group progress reports%
+\index{progress meetings} will be
+at the scheduled time of the Senior Seminar. There will, of
+course, be other work for the seminar.
+
+The due dates for the group project are not included here.
+There will be similar milestones that will be announced by
+the project's advisor.
+
+\begin{description}
+\item[Mid-September.] Submission of a ranked list of three
+possible senior project advisors and
+corresponding project ideas.
+\item[Late September.] Title, advisor\index{advisor!choice of},
+and description due.\index{topic!description due date}
+Submit the title of your project, thesis,
+or clinic; the name of your advisor; and a one- or
+two-sentence description of the undertaking. All students
+will do this, even though the information will be new only
+for the students following the project option.
+\item[Late October.] Annotated
+bibliography due.\index{annotated bibliography!due date}
+[Proj\-ect and research thesis only.]
+\item[Mid-November] Literature review
+and extended abstract due.%
+\index{literature review!due date}%
+\index{extended abstract!due date}
+[Project and research thesis only.]
+\item[Last day of classes.] Revisions, if
+necessary, of literature review and extended abstract due.
+[Project and research thesis only.] 
+\end{description}
+
+In addition, a student and advisor may agree on additional preparatory
+tasks to be completed during the semester.
+
+
+\section*{Senior Year, Spring Semester}
+The schedule common to all students appears below. In addition
+to these activities, you and your advisor\index{advisor!role of}
+will agree on dates for activities---like partial drafts and
+presentation rehearsals---that are specific to your particular
+project.
+\begin{description}
+\item[Throughout the first half of the semester.]
+Prog\-ress report meetings, at three or four week intervals
+starting in the first or second
+week of classes.\index{progress meetings}
+Each student will give an informal, five-minute
+presentation on the project's status.
+Students in the group project will participate in these
+meetings \emph{and} the much more frequent meetings of
+their project team.
+\item[Mid-April.] \emph{Complete} drafts
+of papers and theses due.\index{paper and thesis!drafts}
+Drafts of individual chapters will have been submitted
+earlier.
+[Proj\-ect, group project, and research thesis only.]
+%\item[Late April, usually on a Thursday and a Friday.]
+% hack to get good spacing with such a long label
+\item[]\hspace*{-\labelsep}\textbf{Sometime in April, usually on a Thursday
+and a Friday.}\hspace{\labelsep}%
+Presentations.
+The dates and times will be advertised.\index{presentation!dates}
+\item[One week before the end of classes.] Papers and theses due.%
+\index{paper and thesis!due date}
+[Proj\-ect, group project, and research thesis only.]
+\item[Friday after the end of classes.] Senior grades due.
+\item[Sunday in mid-May.] Commencement.
+\end{description}
+\index{calendar|)}
+\index{scheduling|)}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Appendix: Advice and Crisis Management
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Gratuitous Advice and Crisis Management}
+\label{Appendix:CrisisManagement}
+Clearly, not every problem can be solved by reading this
+booklet. But answers to many common ones \emph{can} be found
+here, and we have seen many problems arise when the advice
+and directions given here are ignored.
+
+We expect you to read and assimilate every word of this
+document within twenty-four hours of receiving it. We
+recognize, however, that you may forget one or two
+details. Here are some pointers that may be helpful in a
+crisis. This list is expected to grow, based in large part
+on your experience; please make suggestions.
+
+\begin{description}
+\item[Getting started.]
+If you are uncertain of which of the three options to
+select, read the material in
+\namedref{Chapter}{Chapter:Premeditation}.
+Take the time to make a deliberate choice
+from among the three options. Speak with as many
+people---especially faculty members and other
+students---as you can, and be certain that you are
+comfortable with your selection.
+\item[Advisor or topic.]
+If you have selected the project option and are casting
+about for an advisor or topic, read
+\namedref{Section}{Section:AdvisorAndTopic}. Speak with
+faculty members and other students. Think, as concretely
+as you can, about the nature of the project and how you
+will pursue it. Remember that the quality of
+the final product is singularly important. 
+\item[Annotated bibliography.]
+If you are faced with creating an annotated bibliography,
+discuss possible sources with your advisor and read
+\namedref{Section}{Section:AnnotatedBibliography}. For help
+with formatting the bibliography, look at the sample files
+\texttt{annbib\discretionary{-}{}{-}template\discretionary{.}{}{.}tex}
+and \texttt{srpaper-sample-biblio.bib}, and read about
+\LaTeX\ generally in \namedref{Section}{Section:LaTeXIntro}
+and about bibliographic details in
+\namedref{Sections}{Subsection:Citations}
+and~\ref{Subsection:Bibliographies}.
+\item[Literature review.]
+If you are about to write a literature review, speak with
+your advisor about the overall approach. Most likely, you
+have read some articles that have introductory sections
+reviewing previous work. These (usually) are good
+examples. Read
+\namedref{Section}{Section:LiteratureReview}. For the
+document itself, use the sample file
+\texttt{srpaper-template.tex}, but remember to specify the 
+\texttt{short} option. Read
+\namedref{Sections}{Section:LaTeXIntro}, 
+\ref{Section:LaTeXAnatomy}, and~\ref{Section:LaTeXDetails}.
+\item[Sloth.]
+Have a specific timeline. If you are in the middle of your
+senior exercise and you are
+behind schedule, take action immediately. Reread
+\namedref{Section}{Section:Scheduling}. Assess the situation
+and make changes. Be willing to omit part of the project, if
+necessary. Ask you advisor to make motivational threats.
+\item[Writer's block.]
+If you are beginning to write a paper or thesis, use a
+divide-and-conquer strategy. Separate the content from the 
+form, and separate the content into manageable
+chapters. Discuss the organization with your advisor. Begin 
+writing the introductory chapters early. Be sure that you
+have a clear vision of your conclusion. Read the first few
+sections of \namedref{Chapter}{Chapter:Prose}.
+
+Begin writing early; there is never enough
+time. You should have a substantial start on your paper
+or thesis by the beginning of Spring Break. 
+Writing the paper is an integral part of the project
+and not something to be saved until everything
+else is finished.
+\item[Formatting.]
+If you are working on formatting your paper or thesis using
+\LaTeX, review the sample file
+\texttt{srpaper-template.tex}. Read the later sections of 
+\namedref{Chapter}{Chapter:Prose}. As problems arise, return to
+the relevant sections in this document, refer to the
+resources listed in \namedref{Section}{Subsection:References}, or
+ask your advisor for further help.
+
+Pay close attention to details (\emph{all} of them!) and
+produce a professional-quality document. Among other things,
+remember to proofread. Double check your spelling. Do not allow a
+line of text to run into the margin or off the edge of a page.
+If you do not
+have any tables, use the \texttt{nolot} option to suppress
+the list of tables after the table of contents.
+\item[Stage fright.]
+As you plan your presentation, reread the advice in
+\namedref{Chapter}{Chapter:Presentation}.
+Consider the visual aids. Think about the audience. Rehearse.
+Then rehearse some more.
+\item[Denial.]
+If you are following the clinic option and think that none
+of this applies to you, remember that you must give a
+presentation. See the previous suggestion.
+\end{description}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Appendix: Source
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Source for This Document}
+\label{Appendix:Source}
+This appendix exists to demonstrate how to create a source
+listing, should you need to do it. Keep in mind, however,
+that the sources are usually not required. Check with your
+advisor.
+
+To save paper, we have omitted the actual source
+listing. The following line, which would have generated the
+listing, was removed.
+\begin{vcode}
+{\small\displayspacing\verbatiminput{srexercise.tex}}
+\end{vcode}
+The listing can be found in the directory
+\texttt{/common/cs/senior-exercise\discretionary{/}{}{/}latex/srexercise.tex}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Bibliography
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{srpaper-sample-biblio}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Index
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\printindex
+
+
+\end{document}
