@@ -3,3 +3,10 @@ Papers/*
 
 #old code
 oldCode/*
+
+#libraries
+code/svm_light/*
+
+#output
+code/PDexamples/*
+code/silence.txt

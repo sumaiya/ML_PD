@@ -61,7 +61,9 @@ Networks, Support Vector Machines, and an Ensemble Learning
 algorithm to reproduce results from \cite{MS12} and \cite{GJ70}. 
 
 Next, I will adapt a regression dataset of PD recordings and combine
-it with the binary classification dataset. I will determine the performance of
+it with the binary classification dataset, testing various techniques
+to consolidate the data including treating the regression data as
+unlabeled data in a semi-supervised learning approach. I will determine the performance of
 the above algorithms on this consolidated dataset. 
 
 Performance of algorithms will be evaluated using k-fold cross
@@ -70,7 +72,7 @@ calculated, as these are of particular importance in medical
 diagnosis. I will also determine accuracy, precision, recall, and
 F-score.
 
-Past related work has used either a regression dataset alone to
+The expands on past related work, which has used either a regression dataset alone to
 predict a Unified Parkinson's Disease Rating Scale score for PD
 patients, or a classification dataset to determine healthy or PD
 diagnosis. The datasets have not been combined, and the regression set
@@ -92,6 +94,15 @@ has not been used to contribute to evaluation of healthy subjects.
 
 \chapter{Background}
 \label{Chapter:One}
+Many medical
+decision-making questions can be reduced to binary
+classification problems, making medical data an ideal domain for
+several machine learning techniques. A few of the most relevant
+algorithms, based on past work in this domain, are discussed
+below. Their applications to medical data in general, reviewed below,
+share many similarities with the specific case of
+Parkinson's diagnosis.
+
 \section{Machine Learning techniques}
 \subsection{Artificial Neural Networks}
 Artificial neurons were first proposed in 1943. Motivated by biological neurons, the artificial neuron received
@@ -102,7 +113,8 @@ network \cite{Ros58}. However, the perceptron model was severely limited, unable
 solve non-linearly separable functions such as XOR \cite{MP69}. Eventually, multilayer perceptrons were developed to
 address the original perceptron model's shortcomings. 
 
-A checkers-playing program used neural networks to train a player \cite{CF01}. The board was encoded as a vector of
+Artificla neural nets have been widely used across a myriad of
+applications. For example, a checkers-playing program used neural networks to train a player \cite{CF01}. The board was encoded as a vector of
 available board positions, with values assigned based on whether the
 square was empty, taken by a regular piece, or taken by a King. The
 neural network consisted of three hidden layers. The first hidden
@@ -113,8 +125,8 @@ node, for a total of 91 nodes. The second and third hidden layers had
 -1 and 1, representing the goodness of the board from the current
 player's perspective. The weights for the network were initially
 specified through a uniform sample, and several networks played against one
-another. The winners were declared 'parents', and they generated
-'offspring networks' with weights varied by a parameter vector. The
+another. The winners were declared `parents', and they generated
+`offspring networks' with weights varied by a parameter vector. The
 process was repeated for many generations to produce an ideal neural
 network.
 
@@ -144,7 +156,8 @@ learners. A good ensemble algorithm will be made up of diverse base
 learners that have varied strengths. The different learners can be
 combined in a number of ways. They can work in parallel on all of the inputs, and their
 outputs can be combined in some way. Alternatively, a multistage combination will train the base
-learners on different subsets of the input data. For example, AdaBoost
+learners on different subsets of the input data. For example, the
+AdaBoost algorithm
 first trains an
 initial learner, and then trains subsequent learners on data that the
 first learner misclassifies. This way, the weaknesses of each
@@ -178,7 +191,7 @@ rule-based, in which case they are created with a knowledge base and
 a set of rules. Alternatively, they can utilize machine learning to
 learn from past data and recognize patterns. Several such
 systems have been proposed, including a statistical approach to
-diagnosing digestive disorders based on a computer interview of the
+diagnosing digestive disorders based on an electronically-administered interview of the
 patient \cite{SK84}. However, the use is not yet widespread, in part
 due to lack of data availability and to limited adoption of uniform
 computer systems \cite{Greenes2007}.
@@ -200,7 +213,7 @@ to overpredict heart disease, though this occurred more with CADENZA
 After that, a novel machine learning approach to diagnosing and
 classifying cardiac arrhythmia was presented, called the VF15
 algorithm. It used a genetic algorithm to learn feature weights. Then,
-each feature 'voted’ on a class prediction. The algorithm had a 62\%
+each feature voted on a class prediction. The algorithm had a 62\%
 accuracy on this task and was found to outperform Naive Bayes \cite{GAD98}.
 
 Another study collected data on ischemic heart disease, including signs and
@@ -241,7 +254,9 @@ PD rating scale \cite{TLMR10}.
 Another study described a weakly supervised multiple instance learning
 approach to detecting symptoms of Parkinson’s Disease. This approach
 addressed the issue of self-reporting resulting in inaccurate or
-incomplete labels \cite{DAlTH12}.
+incomplete data \cite{DAlTH12}. Their algorithm learned to localize
+symptoms to approximate, rather than exact, time ranges, making it
+suitable for the sparse data that may result from incomplete reporting.
 
 Gil and Johnson used a multilayer network with one hidden layer
 and an output layer that output healthy or PD. The inputs were passed

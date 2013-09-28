@@ -5,10 +5,10 @@
 \contentsline {section}{\numberline {1.1}Machine Learning techniques}{1}
 \contentsline {subsection}{\numberline {1.1.1}Artificial Neural Networks}{1}
 \contentsline {subsection}{\numberline {1.1.2}Support Vector Machines}{2}
-\contentsline {subsection}{\numberline {1.1.3}Ensemble Learners}{2}
+\contentsline {subsection}{\numberline {1.1.3}Ensemble Learners}{3}
 \contentsline {section}{\numberline {1.2}Applications to Medical Data}{3}
 \contentsline {subsection}{\numberline {1.2.1}Self-reported input}{3}
-\contentsline {subsection}{\numberline {1.2.2}Clinical Decision Support Systems}{3}
+\contentsline {subsection}{\numberline {1.2.2}Clinical Decision Support Systems}{4}
 \contentsline {subsection}{\numberline {1.2.3}EEG and EKG data}{4}
 \contentsline {section}{\numberline {1.3}Diagnosing Parkinson's Disease}{5}
 \contentsline {chapter}{Bibliography}{7}
