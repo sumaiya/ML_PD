@@ -1,0 +1,8 @@
+TP = 40
+TN = 30
+FP = 18
+FN = 8
+Accuracy = 0.729166666667
+Precision = 0.689655172414
+Recall = 0.833333333333
+Total = 96
