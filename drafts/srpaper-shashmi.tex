@@ -91,9 +91,66 @@ has not been used to contribute to evaluation of healthy subjects.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \frontmatter
+\chapter{Introduction}
+\label{Chapter:One}
+Parkinson's Disease (PD) is a degenerative neurological disorder
+marked by decreased dopamine levels in the brain. It manifests itself
+through a deterioration of movement,
+including the presence of tremors and stiffness. There is commonly a
+marked effect on speech, including dysarthria (difficulty articulating
+sounds), hypophonia (lowered volume), and monotone (reduced pitch
+range). Additionally, 
+cognitive impairments and changes in mood can occur, and risk of
+dementia is increased. PD affects about
+1-2\% of people over 60.
+
+Traditional diagnosis of Parkinson's Disease involves a clinician taking a
+neurological history of the patient and observing motor skills in
+various situations. Since there is no definitive laboratory test to
+diagnose PD, diagnosis is often difficult, particularly in the early
+stages when motor effects are not yet severe. Monitoring progression of the disease over time requires repeated clinic visits by the patient. There is no cure, but pharmacological treatment to
+manage the condition includes dopaminergic drugs. 
+
+Diagnosis is clearly a difficulty in PD management, and an effective
+screening process, particularly one that doesn't require a clinic
+visit, would be beneficial. Since PD patients exhibit characteristic
+vocal features, voice recordings are a useful and noninvasive tool for
+diagnosis. If machine learning algorithms could be applied to a voice recording
+dataset to accurately diagnosis PD, this would be an effective screening step prior to an
+appointment with a clinician.
+
+Actually, this sort of binary classification problem is common
+in many areas of medical diagnosis, and techniques that work well
+within one domain are likely to be applicable to others. Based on
+prior work with PD as well as other disorders, support vector machines
+and artificial neural networks are ideal candidates for this type of
+problem. Another option for exploration is AdaBoost, an ensemble
+approach which combines learners in a way that minimizes their weaknesses. 
+
+However, one
+complication that may exist in available medical data is an
+inconsistency across datasets. For example, multiple datasets for a given
+disorder often exist, collected from different sources and using
+slightly different features. Combining them in some effective way into
+a large, cohesive dataset would result in a more robust and
+well-trained learner. 
+
+Another complication is an occasional lack of
+labeled examples. If some amount of labeled data exists, a
+semi-supervised learning algorithm might be applied, which uses
+a combination of labeled and unlabeled data. One approach is Expectation-Maximization
+(EM) which, given a model, alternates between making predictions about unlabeled data and
+recomputing the parameters of the model until convergence.
+
+A successful machine learning approach to binary classification would
+be applicable to many types of medical diagnosis. Incorporation of
+semi-supervised learning with EM would result in a more robust system
+that is relevant to realistic medical datasets. Within the context of
+PD, this combination of techniques produces a useful screening step
+for a more frictionless diagnosis experience. 
 
 \chapter{Background}
-\label{Chapter:One}
+\label{Chapter:Two}
 Many medical
 decision-making questions can be reduced to binary
 classification problems, making medical data an ideal domain for
@@ -113,7 +170,7 @@ network \cite{Ros58}. However, the perceptron model was severely limited, unable
 solve non-linearly separable functions such as XOR \cite{MP69}. Eventually, multilayer perceptrons were developed to
 address the original perceptron model's shortcomings. 
 
-Artificla neural nets have been widely used across a myriad of
+Artificial neural nets have been widely used across a myriad of
 applications. For example, a checkers-playing program used neural networks to train a player \cite{CF01}. The board was encoded as a vector of
 available board positions, with values assigned based on whether the
 square was empty, taken by a regular piece, or taken by a King. The
@@ -229,20 +286,6 @@ Learning Repository Arrhythmia dataset, and highlighted the need to
 improve on VF15’s 62\% accuracy. They evaluated a Bayesian artificial neural network classifier as compared to Naive Bayes, decision trees, logistic regression, and neural networks \cite{GMCL05}.
 
 \section{Diagnosing Parkinson's Disease}
-Parkinson's Disease (PD) is a degenerative neurological disorder
-marked by decreased dopamine levels in the brain. It manifests itself
-through a deterioration of movement,
-including the presence of tremors and stiffness. There is commonly a
-marked effect on speech, including dysarthria (difficulty articulating
-sounds), hypophonia (lowered volume), and monotone (reduced pitch
-range). 
-Additionally, 
-cognitive impairments and changes in mood can occur.
-Traditional diagnosis of Parkinson's Disease involves taking a
-neurological history of the patient and observing motor skills in
-various situations. Monitoring progression of the disease over time requires repeated clinic visits by the patient. There is no cure, but pharmacological treatment to
-manage the condition includes dopaminergic drugs. 
-
 Speech tests can be used for monitoring Parkinson’s disease, due to
 vocal impairment being a common symptom and early indicator. Using an
 at-home recording device, such as one developed by Intel for PD
@@ -275,10 +318,6 @@ learning rate and momentum, and achieved an accuracy of 97.6471\%.
 They also used SVM with a linear kernel and obtained an
 accuracy of 97.6471\% \cite{MS12}.
 
-% \chapter{Name of Chapter Two}
-% \label{Chapter:Two}
-% This is the first sentence of Chapter~\ref{Chapter:Two}.
-% %\input litreview-shashmi.tex
 % \chapter{Name of Chapter Three}
 % \label{Chapter:Three}
 % This is the first sentence of Chapter~\ref{Chapter:Three}.

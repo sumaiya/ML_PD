@@ -1,19 +1,9 @@
-#
-# Name: Sara Owsley Sood
-# 
-# Description: This file contains a basic class for storing data sets, called DataSet.  
-#            It also contains many example uses of this class.
-#
-#
-#
-#
-#
-
 import sys
 sys.path.append('source/')
 
 from utils import *
 import agents, random, operator
+import csv
 
 #______________________________________________________________________________
 
@@ -175,13 +165,16 @@ def parse_csv(input, delim=','):
 
 #______________________________________________________________________________
 
-def uci_to_svm(dataset, examples, startAt=1, suffix="SVM.dat", path="PDexample/"):
+def uci_to_svm(dataset, examples, startAt=1, suffix="SVM.dat", path="PDexamples/"):
     """Using a Dataset object, create a file of data in SVMLight format"""
     filename = path + dataset.name + suffix
     f = open(filename, 'w')
     target = dataset.target
     #start at 1 to ignore subject ID attr
     attrs = [x for x in dataset.attrs[startAt:] if x is not target]
+    four_attrs_to_keep = [16,17,18,22]
+    eleven_attrs_to_keep = [4,5,8,13,14,15,16,17,18,21,22]
+    attrs = four_attrs_to_keep
     for example in examples:
         if example[target] == 1:
             output = "+1"
@@ -192,10 +185,10 @@ def uci_to_svm(dataset, examples, startAt=1, suffix="SVM.dat", path="PDexample/"
             line += str(attr) + ":" + str(example[attr]) + " "
         f.write(line + "\n")
     f.close()
-    
+    return
 #______________________________________________________________________________
 
-def uci_to_svm_k_fold(dataset, startAt=1, k=10, path="PDexample/"):
+def uci_to_svm_k_fold(dataset, startAt=1, k=10, path="PDexamples/"):
     """ Generate train and test files for k fold cross validation """
     examples = dataset.examples
     random.shuffle(examples)
@@ -208,9 +201,23 @@ def uci_to_svm_k_fold(dataset, startAt=1, k=10, path="PDexample/"):
         uci_to_svm(dataset, training, startAt, "_train_" + str(i) + "_SVM.dat", path)
         uci_to_svm(dataset, testing, startAt, "_test_" + str(i) + "_SVM.dat", path)
 
+    return
+#___________________________________________________________________
 
-#______________________________________________________________________________
+def dataset_to_csv(dataset, filename, useAttrs=22):
+    attrs = dataset.attrs[1:]
+    if useAttrs == 4:
+        attrs = [16,17,18,22,23]
+    elif useAttrs == 11:
+        attrs = [4,5,8,13,14,15,16,17,18,21,22,23]
 
+    examples = [[example[i] for i in attrs] for example in dataset.examples]
+    
+    with open(filename, "w") as f:
+        writer = csv.writer(f)
+        writer.writerows(examples)
+    
+    return
 
 PD = DataSet(name="Parkinsons")
 balanced = DataSet(name="parkinsons_balanced")
