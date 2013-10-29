@@ -204,20 +204,49 @@ def uci_to_svm_k_fold(dataset, startAt=1, k=10, path="PDexamples/"):
     return
 #___________________________________________________________________
 
-def dataset_to_csv(dataset, filename, useAttrs=22):
+def dataset_to_csv(dataset, filename, useAttrs=22, normalized=True):
     attrs = dataset.attrs[1:]
     if useAttrs == 4:
         attrs = [16,17,18,22,23]
     elif useAttrs == 11:
         attrs = [4,5,8,13,14,15,16,17,18,21,22,23]
 
-    examples = [[example[i] for i in attrs] for example in dataset.examples]
+    if normalized:
+        examplesToUse = normalizeData(dataset)
+    else:
+        examplesToUse = dataset.examples
+
+    examples = [[example[i] for i in attrs] for example in examplesToUse]
     
     with open(filename, "w") as f:
         writer = csv.writer(f)
         writer.writerows(examples)
     
     return
+
+def makeMaxMinDict(dataset):
+    ranges = {}
+    for attribute in dataset.attrs:
+        values = [x[attribute] for x in dataset.examples]
+        ranges[attribute] = (min(values), max(values))
+    return ranges
+
+def normalizeData(dataset):
+    ranges = makeMaxMinDict(dataset)
+    ymax = 1
+    ymin = 0
+
+    normalizedExamples = []
+    for example in dataset.examples:
+        normalizedExample = [example[0]]
+        for attribute in dataset.attrs[1:-1]:
+            xmin, xmax = ranges[attribute]
+            y = ((ymax-ymin) * (int(example[attribute])-xmin) / (xmax-xmin)) + ymin
+            normalizedExample.append(y)
+        normalizedExample.append(example[dataset.attrs[-1]])
+        normalizedExamples.append(normalizedExample)
+
+    return normalizedExamples
 
 PD = DataSet(name="Parkinsons")
 balanced = DataSet(name="parkinsons_balanced")

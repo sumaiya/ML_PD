@@ -1,9 +1,9 @@
 import numpy.core.multiarray
-#from sklearn.svm import SVC
-from sklearn.cross_validation import cross_val_score
+from sklearn.svm import SVC
 from sklearn.ensemble import AdaBoostClassifier
 import random
 import dataparser
+import sys
 import numpy as np
 import PDneuralnets
 
@@ -16,7 +16,7 @@ class Bunch(dict):
         dict.__init__(self, kwargs)
         self.__dict__ = self
 
-def runAdaboost(dataset_name="Parkinsons"):
+def runAdaboost(dataset_name="Parkinsons",learners=1000):
     d = dataparser.DataSet(name=dataset_name)
     examples = [example[1:] for example in d.examples]
     n_samples = len(examples)
@@ -30,9 +30,10 @@ def runAdaboost(dataset_name="Parkinsons"):
 
     dataset = Bunch(data=data, target=target)
 
-    #weak_learner = SVC(C=100,kernel='poly',degree=1,probability=True)
+    weak_learner = SVC(C=10000,kernel='poly',degree=1,probability=True)
     
-    clf = AdaBoostClassifier(n_estimators=10000)
+#    clf = AdaBoostClassifier(base_estimator=weak_learner, n_estimators=learners)
+    clf = AdaBoostClassifier(n_estimators=learners)
     
     inputsList = dataset.data.tolist()
     outputsList = dataset.target.tolist()
@@ -71,7 +72,11 @@ def runAdaboost(dataset_name="Parkinsons"):
     print results
 
 if __name__ == '__main__':
-    runAdaboost()
+    numLearners = 1000
+    if len(sys.argv) == 2:
+        numLearners = int(sys.argv[1])
+
+    runAdaboost(learners=numLearners)
 
 
 
