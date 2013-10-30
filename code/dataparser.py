@@ -165,7 +165,7 @@ def parse_csv(input, delim=','):
 
 #______________________________________________________________________________
 
-def uci_to_svm(dataset, examples, startAt=1, suffix="SVM.dat", path="PDexamples/"):
+def uci_to_svm(dataset, examples, startAt=1, suffix="SVM.dat", path="PDexamples/",attrNum=22):
     """Using a Dataset object, create a file of data in SVMLight format"""
     filename = path + dataset.name + suffix
     f = open(filename, 'w')
@@ -173,8 +173,11 @@ def uci_to_svm(dataset, examples, startAt=1, suffix="SVM.dat", path="PDexamples/
     #start at 1 to ignore subject ID attr
     attrs = [x for x in dataset.attrs[startAt:] if x is not target]
     four_attrs_to_keep = [16,17,18,22]
-    eleven_attrs_to_keep = [4,5,8,13,14,15,16,17,18,21,22]
-    attrs = four_attrs_to_keep
+    ten_attrs_to_keep = [5,8,13,14,15,16,17,18,21,22]
+    if attrNum==10:
+        attrs = ten_attrs_to_keep
+    elif attrNum==4:
+        attrs = four_attrs_to_keep
     for example in examples:
         if example[target] == 1:
             output = "+1"
@@ -188,7 +191,7 @@ def uci_to_svm(dataset, examples, startAt=1, suffix="SVM.dat", path="PDexamples/
     return
 #______________________________________________________________________________
 
-def uci_to_svm_k_fold(dataset, startAt=1, k=10, path="PDexamples/"):
+def uci_to_svm_k_fold(dataset, startAt=1, k=10, path="PDexamples/",attrNum=22):
     """ Generate train and test files for k fold cross validation """
     examples = dataset.examples
     random.shuffle(examples)
@@ -198,8 +201,8 @@ def uci_to_svm_k_fold(dataset, startAt=1, k=10, path="PDexamples/"):
         testing = buckets[i]
         training = buckets[0:i] + buckets[i+1:len(buckets)]
         training = [datum for bucket in training for datum in bucket] #flatten
-        uci_to_svm(dataset, training, startAt, "_train_" + str(i) + "_SVM.dat", path)
-        uci_to_svm(dataset, testing, startAt, "_test_" + str(i) + "_SVM.dat", path)
+        uci_to_svm(dataset, training, startAt, "_train_" + str(i) + "_SVM.dat", path,attrNum)
+        uci_to_svm(dataset, testing, startAt, "_test_" + str(i) + "_SVM.dat", path,attrNum)
 
     return
 #___________________________________________________________________
@@ -208,8 +211,8 @@ def dataset_to_csv(dataset, filename, useAttrs=22, normalized=True):
     attrs = dataset.attrs[1:]
     if useAttrs == 4:
         attrs = [16,17,18,22,23]
-    elif useAttrs == 11:
-        attrs = [4,5,8,13,14,15,16,17,18,21,22,23]
+    elif useAttrs == 10:
+        attrs = [5,8,13,14,15,16,17,18,21,22,23]
 
     if normalized:
         examplesToUse = normalizeData(dataset)

@@ -1,6 +1,10 @@
 \newcommand{\etalchar}[1]{$^{#1}$}
 \begin{thebibliography}{DAlTH12}
 
+\bibitem[BL13]{Bache+Lichman:2013}
+K.~Bache and M.~Lichman.
+\newblock {UCI} machine learning repository, 2013.
+
 \bibitem[CF01]{CF01}
 Kumar Chellapila and David~B. Fogel.
 \newblock Evolving an expert checkers playing program without using human
@@ -59,6 +63,12 @@ Thorsten Joachims.
 \newblock In {\em Proceedings of the 10th European Conference on Machine
   Learning}, ECML '98, pages 137--142, London, UK, UK, 1998. Springer-Verlag.
 
+\bibitem[Joa99]{svmlight}
+T.~Joachims.
+\newblock Making large-scale svm learning practical. advances in kernel methods
+  - support vector learning.
+\newblock {\em MIT-Press}, 1999.
+
 \bibitem[KKG{\etalchar{+}}99]{KKG+99}
 Matjaz Kukar, Igor Kononenko, Ciril Groselj, Katarina Kralj, and Jure Fettich.
 \newblock Analysing and improving the diagnosis of ischaemic heart disease with
@@ -70,6 +80,13 @@ Igor Kononenko.
 \newblock Machine learning for medical diagnosis: history, state of the art and
   perspective.
 \newblock {\em Artificial Intelligence in Medicine}, 23:89--109, 2001.
+
+\bibitem[LMH{\etalchar{+}}09]{LittleMHSR09}
+Max~A. Little, Patrick~E. McSharry, Eric~J. Hunter, Jennifer~L. Spielman, and
+  Lorraine~O. Ramig.
+\newblock Suitability of dysphonia measurements for telemonitoring of
+  parkinson's disease.
+\newblock {\em IEEE Trans. Biomed. Engineering}, 56(4):1015--1022, 2009.
 
 \bibitem[MP43]{MP43}
 W.~S. McCulloch and W.~Pitts.
@@ -93,11 +110,24 @@ V.~Podgorolec.
   alzheimer's disease.
 \newblock {\em Electronics and Electrical Engineering}, 18:61--64, 2012.
 
+\bibitem[PVG{\etalchar{+}}11]{scikitlearn}
+F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
+  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos,
+  D.~Cournapeau, M.~Brucher, M.~Perrot, and E.~Duchesnay.
+\newblock Scikit-learn: Machine learning in python.
+\newblock {\em Journal of Machine Learning Research}, 12:2825--2830, 2011.
+
 \bibitem[Ros58]{Ros58}
 Frank Rosenblatt.
 \newblock The perceptron: A probabilistic model for information storage and
   organization in the brain.
 \newblock {\em Psychological Review}, 65(6):386--408, 1958.
+
+\bibitem[SBW{\etalchar{+}}10]{pybrain}
+Tom Schaul, Justin Bayer, Daan Wierstra, Yi~Sun, Martin Felder, Frank Sehnke,
+  Thomas R{\"u}ckstie{\ss}, and J{\"u}rgen Schmidhuber.
+\newblock Pybrain.
+\newblock {\em Journal of Machine Learning Research}, 11:743--746, 2010.
 
 \bibitem[SK84]{SK84}
 Dj~Spiegelhalter and Rp~Knilljones.

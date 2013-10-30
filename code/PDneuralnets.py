@@ -7,7 +7,7 @@ from pybrain.tools.validation import CrossValidator
 from pybrain.structure.modules import *
 import random
 
-def main(numIn=22, datasource="PD",k=10,normalized=False,numEpochs=1000):
+def main(numIn=22, datasource="PD",k=10,normalized=True,numEpochs=1000):
     norm='normalized_1_'if normalized else ''
     filename = "NN/" + str(datasource) + "_NN_" + norm+ str(numIn) + ".csv"
     dataFile = open(filename,'r')
@@ -17,15 +17,17 @@ def main(numIn=22, datasource="PD",k=10,normalized=False,numEpochs=1000):
     random.shuffle(fullData)
     buckets = [fullData[i::k] for i in range(k)]
 
-    wd = 0.01
-    lrd = 1.0
-    results = 0
-    for wd in [0.05]:
-        for l in [0.05]:#map(lambda x: x/100.0, range(80,100,10)):
-            for m in [0.05]:#map(lambda x: x/100.0, range(0,100,1)):
+#    for param in [(0.01,0.01,0.01),(0.1,0.3,0)]:
+#        l = param[0]
+#        m = param[1]
+#        wd = param[2]
+#        print l,m,wd
+    for l in [0.05]:
+        for m in [0.01]:
+            for wd in [0.01]:
                 TP = TN = FP = FN = 0
                 for i in range(k):
-                    print i, ' fold'
+ #                   print i, ' fold'
                     testing = buckets[i]
                     training = buckets[0:i] + buckets[i+1:len(buckets)]
                     training = [datum for bucket in training for datum in bucket] #flatten
@@ -47,27 +49,28 @@ def main(numIn=22, datasource="PD",k=10,normalized=False,numEpochs=1000):
                     ts._convertToOneOfMany()
 
                     expectedOutput = [int(out[0]) for out in ts.data['class'].tolist()]
-                    print expectedOutput
+        #                    print expectedOutput
                     
-                    #add hiddenclass=LinearLayer
-                    net = buildNetwork(tr.indim,13,tr.outdim,recurrent=True,hiddenclass=LinearLayer,outclass=SigmoidLayer,bias=True)
+                    net = buildNetwork(tr.indim,13,tr.outdim,recurrent=False,hiddenclass=LinearLayer,outclass=SigmoidLayer,bias=True)
                     #return tr, ts, net, expectedOutput
-                    trainer = BackpropTrainer(net,tr,learningrate=l,momentum=m)
-                    #trainer.trainUntilConvergence(dataset=tr)
+                    trainer = BackpropTrainer(net,tr,learningrate=l,momentum=m,weightdecay=wd)
+                    print 'training til convergence'
+##                    trainer.trainUntilConvergence()
+                    print 'converged?!'
                     for j in range(numEpochs):
                         if j%1000 == 0: print j
                         trainer.train()
 
                     actualOutput = trainer.testOnClassData(ts)
-                    print actualOutput
+                   # print actualOutput
                     tp, tn, fp, fn = confusionMatrix(expectedOutput, actualOutput)
-                    print tp,tn,fp,fn
+        #                    print tp,tn,fp,fn
                     TP += tp
                     TN += tn
                     FP += fp
                     FN += fn
-                    print " TP: " + str(TP) + " TN: " + str(TN) + " FP: " + str(FP) + " FN: " + str(FN)
-                    print
+ #                   print " TP: " + str(TP) + " TN: " + str(TN) + " FP: " + str(FP) + " FN: " + str(FN)
+ #                   print
                     
                 results = evaluate(TP,TN,FP,FN)
                 print "learning: ", l, " momentum: ", m, " weight: ", wd

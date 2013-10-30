@@ -318,12 +318,269 @@ learning rate and momentum, and achieved an accuracy of 97.6471\%.
 They also used SVM with a linear kernel and obtained an
 accuracy of 97.6471\% \cite{MS12}.
 
-% \chapter{Name of Chapter Three}
-% \label{Chapter:Three}
+ \chapter{Methods}
+ \label{Chapter:Three}
+
+\section{Data}
+The dataset used in this project is from the UCI Machine Learning
+Repository \cite{Bache+Lichman:2013}, and contains data from voice
+recordings of 23
+subjects with Parkinson's disease and 8 control subjects. There are a
+total of 195 recordings, from which 22 different voice
+measure features have been extracted. The features are listed in
+Table \ref{table:attributes}. Each example also includes a subject
+identifier and a binary classification attribute which
+indicates whether or not the subject has PD.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+
+MDVP:Fo(Hz) &  Average vocal fundamental frequency \\ \hline
+MDVP:Fhi(Hz) & Maximum vocal fundamental frequency \\ \hline
+MDVP:Flo(Hz) & Minimum vocal fundamental frequency \\ \hline
+MDVP:Jitter(\%) & Average absolute difference of pitch
+between consecutive periods, divided by the average pitch\\ \hline
+MDVP:Jitter(Abs) & Average absolute difference of pitch between
+consecutive periods \\ \hline
+MDVP:RAP & Average absolute pitch difference between a period and the
+average of it and its neighbors, divided by the average pitch \\ \hline
+MDVP:PPQ & Average absolute pitch difference between a period and the
+average of it and its four closest neighbors, divided by the average pitch \\ \hline
+Jitter:DDP & Average absolute pitch difference between consecutive
+differences between consecutive periods, divided by the average pitch \\ \hline
+MDVP:Shimmer & Average absolute difference between amplitudes of
+consecutive periods, divided by average amplitude \\ \hline
+MDVP:Shimmer(dB) & Measure of period-to-period variability of
+amplitude, in decibels \\ \hline
+Shimmer:APQ3 & Average absolute difference between amplitude of a
+period and the average of it and its neighbors' amplitudes, divided by the
+average amplitude \\ \hline
+Shimmer:APQ5 & Average absolute difference between amplitude of a
+period and the average of it and its four closest neighbors' amplitudes, divided by the
+average amplitude \\ \hline
+MDVP:APQ & Measure of variation in amplitude \\ \hline
+Shimmer:DDA & Measure of variation in amplitude \\ \hline
+NHR & Noise to harmonic ratio \\ \hline
+HNR & Harmonic to noise ratio \\ \hline
+RPDE & Recurrence period density entropy, a measure of periodicity \\ \hline
+D2 & Nonlinear dynamical complexity measure \\ \hline
+DFA & A measure of the stochastic self-similarity of noise in the
+speech signal \\ \hline
+spread1 & Nonlinear measure of fundamental frequency variation \\ \hline
+spread2 & Nonlinear measure of fundamental frequency variation \\ \hline
+PPE & Nonlinear measure of fundamental frequency variation \\ \hline
+\end{tabular}
+\end{center}
+\caption[Features from Voice Recordings]{Features that have been extracted
+  from subjects' voice recordings.}
+\label{table:attributes}
+\end{table}
+
+
+\section{Neural Networks}
+The dataset was prepared for analysis by scaling
+all features to values between 0 and 1 and converting the set to a
+classification dataset format. The neural network library PyBrain
+\cite{pybrain} was used to create a feedforward neural network with a
+bias node. The input layer of the network consisted of 22 neurons, one
+for each of the scaled features. There was one linear hidden layer, with
+13 neurons. The output layer was a single classification neuron with a
+sigmoid activation function. This design was based on previous work
+\cite{GJ70}. A backpropagation trainer was created with a learning
+rate and momentum that were varied
+from 0.01 to 1 in increments of 0.01 to determine optimal parameter values. 
+
+
+\section{Support Vector Machines}
+Three versions of the dataset were produced: one with all the
+features, one with a 10-feature subset, and another with a 4-feature
+subset. Subsets were determined based on prior work
+\cite{LittleMHSR09}, although the paper being replicated (\cite{MS12})
+does not explicitly enumerate which features were used.
+
+A number of strategies were explored for dealing with an unbalanced
+dataset. In one approach, the minority class was oversampled to to create a dataset
+with equal proportions of both classes. In another, the majority class
+was undersampled, leading to a smaller but balanced dataset. The final
+alternative was to adjust the cost-factor of the SVM, such that
+training errors on negative examples outweighed errors on positive
+examples. Since the negative (healthy) class was the minority class,
+this penalized false positives more than it did false negatives. Each
+of these strategies was executed using the three feature subsets
+described above.
+
+The support vector machine was created using the SVM-light library \cite{svmlight}. A
+variety of kernels were used, including linear, 2-, 3-, and 4-degree
+polynomial, and sigmoid tanh. The cost-factor was determined based on whether
+or not the dataset was balanced; it was set to 1 for the
+balanced datasets and to lower values for the imbalanced set. The C
+parameter, which is a trade-off between training error and SVM margin,
+was varied from 0.01 to 10000 at factor of 10 intervals.
+
+
+\section{AdaBoost}
+An ensemble boosting approach was implemented using the scikit-learn
+library \cite{scikitlearn}. Base learners were created with both SVMs and Decision Tree
+Classifiers. When the weak learner was an SVM, a linear kernel was
+used and the C parameter was varied from 0.01 to 10000 at factor of 10
+intervals. The number of learners were varied from 1 to 1000000 to
+determine optimal performance.
+
 % This is the first sentence of Chapter~\ref{Chapter:Three}.
 % \chapter{Name of Chapter Four}
 % \label{Chapter:Four}
 % This is the first sentence of Chapter~\ref{Chapter:Four}.
+
+\chapter{Evaluation}
+\label{Chapter:Four}
+All learners were evaluated using 10-fold cross validation. Data was
+shuffled then 
+divided into 10 sections, and the learner was trained on 9 of those
+sections and tested on the 10th. The test section was rotated such
+that this process occurred 10 times. The learner's performance on the
+test set was compared against the expected values, and a confusion
+matrix was generated, consisting of the numbers of true positives,
+true negatives, false positives, and false negatives. An example
+confusion matrix is shown in Table \ref{table:sampleCM}. These values
+were used to calculate accuracy, specificity, sensitivity, recall precision, and F-score, as shown in Equations \ref{eq:accuracy}
+through \ref{eq:fscore}.
+
+\begin{equation}
+\mbox{accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+\label{eq:accuracy}
+\end{equation}
+
+\begin{equation}
+\mbox{specificity} = \frac{TN}{TN + FP}
+\label{eq:recall}
+\end{equation}
+
+\begin{equation}
+\mbox{sensitivity} = \mbox{recall} = \frac{TP}{TP + FN}
+\label{eq:recall}
+\end{equation}
+
+\begin{equation}
+\mbox{precision} = \frac{TP}{TP + FP}
+\label{eq:precision}
+\end{equation}
+
+\begin{equation}
+\mbox{F-score} = 2 \cdot \frac{precision \cdot recall}{precision + recall}
+\label{eq:fscore}
+\end{equation}
+
+Results for each of the learners, along with the parameters selected
+to obtain that result, are described below. The results here are based on using all the features, but the paper
+being replicated used an undefined subset of the feature
+space. Without knowing which features were used, it is difficult to
+replicate those results exactly. This is an area for
+improvement in future work.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|} 
+\hline
+& Truth: PD & Truth: Healthy \\ \hline
+Predicted: PD & True positives & False positives \\ \hline
+Predicted: Healthy & False negatives & True negatives \\ \hline
+
+\end{tabular}
+\end{center}
+\caption[Confusion Matrix sample]{A sample confusion matrix.}
+\label{table:sampleCM}
+\end{table}
+
+\section{Neural Network}
+The best performance was achieved using the full dataset and all 22 attributes, with each
+feature scaled to a value between 0 and 1. Learning rate was 0.05,
+momentum was 0.01, and weight decay was 0.01. The trainer ran for 1000
+epochs and resulting in the confusion matrix shown in Table
+\ref{table:NNCM} and the performance shown in Table
+\ref{table:performance}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|} 
+\hline
+& Truth: PD & Truth: Healthy \\ \hline
+Predicted: PD & 146 & 29 \\ \hline
+Predicted: Healthy & 1 & 19 \\ \hline
+
+\end{tabular}
+\end{center}
+\caption[Confusion Matrix for Neural Network]{A confusion matrix for
+  the neural network classifier.}
+\label{table:NNCM}
+\end{table}
+
+\section{Support Vector Machine}
+The full dataset was used with a reduced feature space consisting of
+10 features. The kernel was a 2nd degree polynomial, cost factor was set to 0.85, and the C parameter was
+1000. This resulted in the confusion matrix seen in Table
+\ref{table:SVMCM} and performance in Table \ref{table:performance}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+ & Truth: PD & Truth: Healthy \\ \hline
+Predicted: PD & 136 & 16 \\ \hline
+Predicted: Healthy &  11 & 32 \\ \hline
+
+\end{tabular}
+\end{center}
+\caption[Confusion Matrix for Neural Network]{A confusion matrix for
+  the support vector machine classifier.}
+\label{table:SVMCM}
+\end{table}
+
+\section{AdaBoost}
+Using a decision tree classifier as a base learner, 1000 base learners
+were combined with AdaBoost and
+resulted in the confusion matrix in Table \ref{table:ABCM}. The
+performance of this ensemble approach can be seen in Table \ref{table:performance}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+
+ & Truth: PD & Truth: Healthy \\ \hline
+Predicted: PD & 143 & 9 \\ \hline
+Predicted: Healthy &  4 & 39 \\ \hline
+
+\end{tabular}
+\end{center}
+\caption[Confusion Matrix for AdaBoost]{A confusion matrix for
+  the AdaBoost classifier.}
+\label{table:ABCM}
+\end{table}
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+
+ & Accuracy & Specificity & Sensitivity & Recall & Precision & F-Score \\ \hline
+Neural Network & 0.846 & 0.396 & 0.993 & 0.993 & 0.834 & 0.907 \\ \hline
+Support Vector Machine & 0.862 & 0.667 & 0.925 & 0.925 & 0.895 & 0.910 \\ \hline
+AdaBoost & 0.933 & 0.813 & 0.973 & 0.973 & 0.941 & 0.957 \\ \hline
+
+\end{tabular}
+\end{center}
+\caption[Performance for all Classifiers]{Performance metrics for all classifiers.}
+\label{table:performance}
+\end{table}
+
+
+\chapter{Conclusion}
+\label{Chapter:Five}
+Conclusion and future work
+
 
 \bibliography{srpaper-shashmi-biblio}
 

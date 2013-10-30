@@ -12,4 +12,14 @@
 \contentsline {subsection}{\numberline {2.2.2}Clinical Decision Support Systems}{6}
 \contentsline {subsection}{\numberline {2.2.3}EEG and EKG data}{6}
 \contentsline {section}{\numberline {2.3}Diagnosing Parkinson's Disease}{7}
-\contentsline {chapter}{Bibliography}{9}
+\contentsline {chapter}{\numberline {3}Methods}{9}
+\contentsline {section}{\numberline {3.1}Data}{9}
+\contentsline {section}{\numberline {3.2}Neural Networks}{9}
+\contentsline {section}{\numberline {3.3}Support Vector Machines}{11}
+\contentsline {section}{\numberline {3.4}AdaBoost}{11}
+\contentsline {chapter}{\numberline {4}Evaluation}{13}
+\contentsline {section}{\numberline {4.1}Neural Network}{14}
+\contentsline {section}{\numberline {4.2}Support Vector Machine}{15}
+\contentsline {section}{\numberline {4.3}AdaBoost}{15}
+\contentsline {chapter}{\numberline {5}Conclusion}{16}
+\contentsline {chapter}{Bibliography}{17}

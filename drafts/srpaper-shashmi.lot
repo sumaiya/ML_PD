@@ -1,2 +1,11 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Features from Voice Recordings}}{10}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Confusion Matrix sample}}{14}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Confusion Matrix for Neural Network}}{14}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Confusion Matrix for Neural Network}}{15}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Confusion Matrix for AdaBoost}}{15}
+\contentsline {table}{\numberline {4.5}{\ignorespaces Performance for all Classifiers}}{15}
+\addvspace {10\p@ }

@@ -30,9 +30,9 @@ def runAdaboost(dataset_name="Parkinsons",learners=1000):
 
     dataset = Bunch(data=data, target=target)
 
-    weak_learner = SVC(C=10000,kernel='poly',degree=1,probability=True)
+#    weak_learner = SVC(C=10000,kernel='poly',degree=1,probability=True)
     
-#    clf = AdaBoostClassifier(base_estimator=weak_learner, n_estimators=learners)
+ #   clf = AdaBoostClassifier(base_estimator=weak_learner, n_estimators=learners)
     clf = AdaBoostClassifier(n_estimators=learners)
     
     inputsList = dataset.data.tolist()
