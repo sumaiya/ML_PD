@@ -4,6 +4,7 @@ sys.path.append('source/')
 from utils import *
 import agents, random, operator
 import csv
+import adaboost
 
 #______________________________________________________________________________
 
@@ -165,7 +166,7 @@ def parse_csv(input, delim=','):
 
 #______________________________________________________________________________
 
-def uci_to_svm(dataset, examples, startAt=1, suffix="SVM.dat", path="PDexamples/",attrNum=22):
+def uci_to_svm(dataset, examples, startAt=1, suffix="SVM.dat", path="",attrNum=22):
     """Using a Dataset object, create a file of data in SVMLight format"""
     filename = path + dataset.name + suffix
     f = open(filename, 'w')
@@ -186,6 +187,47 @@ def uci_to_svm(dataset, examples, startAt=1, suffix="SVM.dat", path="PDexamples/
         line = output + " "
         for attr in attrs:
             line += str(attr) + ":" + str(example[attr]) + " "
+        f.write(line + "\n")
+    f.close()
+    return
+
+
+# sparse_svm_format("combinedsvm.dat", PD, PDregression)
+
+def sparse_svm_format(filename,dataset1,dataset2):
+    examples1, examples2 = adaboost.combineDatasets(dataset1,dataset2)
+
+    target = len(examples1[0])-1
+    attrs = range(len(examples1[0])-1)
+
+    PDdata = DataSet(name="Parkinsons")
+
+    toAppend = [1,2,3,19,20]
+
+    for i, PDexample in enumerate(PDdata.examples):
+        for at in toAppend:
+            examples1[i].append(PDexample[at])
+
+    examples = examples1 + examples2
+
+    shortLength = len(attrs)
+    appending = range(shortLength,shortLength+len(toAppend))
+
+    attrs = range(1,len(examples[0])+1)
+    attrs.remove(len(examples2[0]))
+        
+    f = open(filename,'w')
+    for example in examples:
+        if len(example) == shortLength + 1:
+            output = "-1"
+        elif example[target] == 1:
+            output = "+1"
+        elif example[target] == 0:
+            output = "-0"
+        line = output + " "
+        for attr in attrs:
+            if attr <= len(example):
+                line += str(attr) + ":" + str(example[attr-1]) + " "
         f.write(line + "\n")
     f.close()
     return

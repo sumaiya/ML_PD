@@ -96,7 +96,7 @@ def evaluate(TP,TN,FP,FN):
     return {"a": accuracy, "p": precision, "r": recall}
 
 
-def confusionMatrix(expected, actual):
+def confusionMatrix(expected, actual,neg=0):
 
     TP = TN = FP = FN = 0
     accuracy = precision = recall = 0
@@ -105,11 +105,11 @@ def confusionMatrix(expected, actual):
     for pair in pairs:
         if pair == (1,1):
             TP += 1
-        elif pair == (0,0):
+        elif pair == (neg,neg):
             TN += 1
-        elif pair == (0,1):
+        elif pair == (neg,1):
             FP += 1
-        elif pair == (1,0):
+        elif pair == (1,neg):
             FN += 1
 
     return TP, TN, FP, FN

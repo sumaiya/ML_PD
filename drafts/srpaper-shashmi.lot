@@ -3,9 +3,13 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {3.1}{\ignorespaces Features from Voice Recordings}}{10}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Confusion Matrix sample}}{14}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Confusion Matrix for Neural Network}}{14}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Confusion Matrix for Neural Network}}{15}
-\contentsline {table}{\numberline {4.4}{\ignorespaces Confusion Matrix for AdaBoost}}{15}
-\contentsline {table}{\numberline {4.5}{\ignorespaces Performance for all Classifiers}}{15}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Confusion Matrix Sample}}{15}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Confusion Matrix for Neural Network}}{15}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Confusion Matrix for Neural Network}}{16}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Confusion Matrix for AdaBoost}}{16}
+\contentsline {table}{\numberline {4.5}{\ignorespaces Comparison to Prior Work}}{16}
+\contentsline {table}{\numberline {4.6}{\ignorespaces Performance for all Classifiers}}{17}
+\contentsline {table}{\numberline {4.7}{\ignorespaces Confusion Matrix for AdaBoost}}{17}
+\contentsline {table}{\numberline {4.8}{\ignorespaces Confusion Matrix for AdaBoost}}{18}
+\contentsline {table}{\numberline {4.9}{\ignorespaces Performance on Combined Dataset}}{18}
 \addvspace {10\p@ }

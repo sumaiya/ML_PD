@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2009.11.7)  30 OCT 2013 00:31
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2009.11.7)  10 NOV 2013 18:59
 entering extended mode
  %&-line parsing enabled.
 **\input srpaper-shashmi.tex
@@ -149,20 +149,20 @@ Missing character: There is no ™ in font cmr10!
 Chapter 3.
 [9
 
-] [10] [11] [12]
+] [10] [11] [12] [13]
 Chapter 4.
-[13
+[14
 
-] [14]
-Overfull \hbox (21.98889pt too wide) in paragraph at lines 565--574
+] [15]
+Overfull \hbox (21.98889pt too wide) in paragraph at lines 618--627
  [] 
  []
 
-[15]
+[16] [17] [18]
 Chapter 5.
-(./srpaper-shashmi.bbl [16
+[19
 
-]
+] (./srpaper-shashmi.bbl [20] [21]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¼ in font cmr10!
@@ -170,22 +170,22 @@ Missing character: There is no Ã in font cmr10!
 Missing character: There is no ¶ in font cmr10!
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no ‡ in font cmr10!
- [17
+ [22
 
-] [18]
+] [23]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
-) [19] (./srpaper-shashmi.aux)
+) [24] (./srpaper-shashmi.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 635 strings out of 493848
- 7932 string characters out of 3149207
- 63688 words of memory out of 3000000
- 3949 multiletter control sequences out of 15000+200000
+ 639 strings out of 493848
+ 8011 string characters out of 3149207
+ 63694 words of memory out of 3000000
+ 3953 multiletter control sequences out of 15000+200000
  10059 words of font info for 35 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  27i,9n,23p,235b,260s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -199,9 +199,9 @@ ocal/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loca
 l/texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local
 /texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
 texlive/2009/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on srpaper-shashmi.pdf (25 pages, 178238 bytes).
+Output written on srpaper-shashmi.pdf (30 pages, 189231 bytes).
 PDF statistics:
- 123 PDF objects out of 1000 (max. 8388607)
+ 138 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

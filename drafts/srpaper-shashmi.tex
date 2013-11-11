@@ -47,8 +47,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{A Machine Learning Approach to Diagnosis of Parkinson's Disease}
 \author{Sumaiya Hashmi}
-\date{September 20, 2013}
-\advisor{Professor Sara Sood}
+\date{December 9, 2013}
+\advisor{Professor Sara Sood, advisor}
 \abstract{
 I will investigate applications of machine learning algorithms to medical
 data, adaptations of differences in data collection, and the use of ensemble techniques.
@@ -160,7 +160,7 @@ below. Their applications to medical data in general, reviewed below,
 share many similarities with the specific case of
 Parkinson's diagnosis.
 
-\section{Machine Learning techniques}
+\section{Machine Learning Techniques}
 \subsection{Artificial Neural Networks}
 Artificial neurons were first proposed in 1943. Motivated by biological neurons, the artificial neuron received
 several weighted inputs and produced an output, based on some
@@ -321,7 +321,7 @@ accuracy of 97.6471\% \cite{MS12}.
  \chapter{Methods}
  \label{Chapter:Three}
 
-\section{Data}
+\section{Dataset}
 The dataset used in this project is from the UCI Machine Learning
 Repository \cite{Bache+Lichman:2013}, and contains data from voice
 recordings of 23
@@ -378,6 +378,19 @@ PPE & Nonlinear measure of fundamental frequency variation \\ \hline
 \label{table:attributes}
 \end{table}
 
+\section{Unbalanced Data}
+A number of strategies were explored for dealing with an unbalanced
+dataset. In the oversampling approach, samples from the minority
+(healthy) class were replicated to create a dataset
+with equal proportions of both classes. 
+In the undersampling approach, fewer samples were taken from the
+majority (PD) class, leading to a smaller but balanced dataset. The final
+alternative was to adjust the cost-factor of the model, such that
+training errors on negative examples outweighed errors on positive
+examples. Since the negative (healthy) class was the minority class,
+this penalized false positives more than it did false negatives. The
+evaluation section includes results from the most effective of these
+approaches for each model.
 
 \section{Neural Networks}
 The dataset was prepared for analysis by scaling
@@ -400,17 +413,6 @@ subset. Subsets were determined based on prior work
 \cite{LittleMHSR09}, although the paper being replicated (\cite{MS12})
 does not explicitly enumerate which features were used.
 
-A number of strategies were explored for dealing with an unbalanced
-dataset. In one approach, the minority class was oversampled to to create a dataset
-with equal proportions of both classes. In another, the majority class
-was undersampled, leading to a smaller but balanced dataset. The final
-alternative was to adjust the cost-factor of the SVM, such that
-training errors on negative examples outweighed errors on positive
-examples. Since the negative (healthy) class was the minority class,
-this penalized false positives more than it did false negatives. Each
-of these strategies was executed using the three feature subsets
-described above.
-
 The support vector machine was created using the SVM-light library \cite{svmlight}. A
 variety of kernels were used, including linear, 2-, 3-, and 4-degree
 polynomial, and sigmoid tanh. The cost-factor was determined based on whether
@@ -428,10 +430,43 @@ used and the C parameter was varied from 0.01 to 10000 at factor of 10
 intervals. The number of learners were varied from 1 to 1000000 to
 determine optimal performance.
 
-% This is the first sentence of Chapter~\ref{Chapter:Three}.
-% \chapter{Name of Chapter Four}
-% \label{Chapter:Four}
-% This is the first sentence of Chapter~\ref{Chapter:Four}.
+\section{Combining Datasets}
+In addition to the primary classification dataset, there is a
+secondary regression dataset of voice recordings available from \cite{Bache+Lichman:2013}. The
+secondary dataset contains a total of 5875 recordings from 42
+subjects, with 16 vocal attributes each. The primary dataset includes
+these 16 attributes along with 6 additional voice recording features. The
+secondary dataset's output is a score on the
+Unified Parkinson's Disease Rating Scale (UPDRS).
+
+In determining whether there is a way to utilize this secondary
+dataset, it is useful to create a combined dataset containing the
+additional points. Since there isn't a perfect overlap of attributes,
+there are two ways of doing this. We can create a combined
+dataset with a reduced feature space, which only includes the
+intersection of features across the
+primary and secondary datasets. Alternatively, we can create a sparse
+dataset which includes the union of features across both datasets, and
+has a null value when a feature is not available. Both of these
+approaches are utilized here.
+
+To continue treating this as a classification problem, there are a
+number of ways to handle the secondary dataset's regression
+outputs. One is to set a hard label on each datapoint in the secondary
+dataset, by mapping UPDRS score to either healthy or PD. This
+effectively transforms the secondary dataset into a classification
+set, and we are left with a standard binary classification problem.
+
+An alternative is to treat the secondary datapoints as unlabeled
+data. Since we have labeled data from the primary dataset, the
+addition of unlabeled data makes this problem an ideal candidate for a
+semi-supervised learning approach. Expectation maximization can be
+used to train a model on the labeled data, use it to assign soft
+labels to the unlabeled data, and train a new model using both
+datasets. This process continues until convergence.
+
+In both cases, the highest performing algorithm, based on evaluation
+of the models described above, will be used.
 
 \chapter{Evaluation}
 \label{Chapter:Four}
@@ -473,11 +508,13 @@ through \ref{eq:fscore}.
 \end{equation}
 
 Results for each of the learners, along with the parameters selected
-to obtain that result, are described below. The results here are based on using all the features, but the paper
-being replicated used an undefined subset of the feature
+to obtain that result, are described below. The results here are based
+on using all the features, but one of the papers
+being reproduced used an undefined subset of the feature
 space. Without knowing which features were used, it is difficult to
 replicate those results exactly. This is an area for
-improvement in future work.
+improvement in future work. A comparison to prior work is shown in
+Table \ref{table:comparison}.
 
 \begin{table}
 \begin{center}
@@ -489,7 +526,7 @@ Predicted: Healthy & False negatives & True negatives \\ \hline
 
 \end{tabular}
 \end{center}
-\caption[Confusion Matrix sample]{A sample confusion matrix.}
+\caption[Confusion Matrix Sample]{A sample confusion matrix.}
 \label{table:sampleCM}
 \end{table}
 
@@ -506,8 +543,8 @@ epochs and resulting in the confusion matrix shown in Table
 \begin{tabular}{|l|l|l|} 
 \hline
 & Truth: PD & Truth: Healthy \\ \hline
-Predicted: PD & 146 & 29 \\ \hline
-Predicted: Healthy & 1 & 19 \\ \hline
+Predicted: PD & 147 & 30 \\ \hline
+Predicted: Healthy & 0 & 18 \\ \hline
 
 \end{tabular}
 \end{center}
@@ -559,6 +596,22 @@ Predicted: Healthy &  4 & 39 \\ \hline
 \label{table:ABCM}
 \end{table}
 
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+
+ & & Gil and Johnson 2009 & Mandal and Sairam 2012 \\ \hline
+Neural Network & 0.908 & 0.948 & 0.86 \\ \hline
+Support Vector Machine & 0.910 & 0.948 & 0.93 \\ \hline
+AdaBoost & 0.957 & - & 0.95\\ \hline
+
+\end{tabular}
+\end{center}
+\caption[Comparison to Prior Work]{Comparison to prior work. F-scores
+  from this work, compared to \cite{GJ70} and \cite{MS12}.}
+\label{table:comparison}
+\end{table}
 
 \begin{table}
 \begin{center}
@@ -566,21 +619,149 @@ Predicted: Healthy &  4 & 39 \\ \hline
 \hline
 
  & Accuracy & Specificity & Sensitivity & Recall & Precision & F-Score \\ \hline
-Neural Network & 0.846 & 0.396 & 0.993 & 0.993 & 0.834 & 0.907 \\ \hline
+Neural Network & 0.846 & 0.375 & 1.000 & 1.000 & 0.831 & 0.908 \\ \hline
 Support Vector Machine & 0.862 & 0.667 & 0.925 & 0.925 & 0.895 & 0.910 \\ \hline
 AdaBoost & 0.933 & 0.813 & 0.973 & 0.973 & 0.941 & 0.957 \\ \hline
 
 \end{tabular}
 \end{center}
-\caption[Performance for all Classifiers]{Performance metrics for all classifiers.}
+\caption[Performance for all Classifiers]{Performance metrics for all
+  classifiers, trained and tested on the primary dataset.}
 \label{table:performance}
+\end{table}
+
+\section{Combined Dataset}
+For both hard labeling and expectation maximization, two versions of
+the combined dataset were used: a sparse dataset and a set with a
+reduced feature space.
+
+AdaBoost had the highest performance of the three approaches outlined
+above, so it was used in evaluating these datasets. Various approaches
+for dealing with unbalanced data were used, and oversampling the
+minority set had the highest performance. Undersampling the majority
+set was not used because doing so would not take advantage of the
+additional data available through the secondary dataset.
+
+The models were tested on samples from
+the primary dataset. A balanced subset of samples was retained for
+testing, and 3-fold cross validation was used for evaluation. 
+
+Confusion matrices for hard labeling and expectation maximization are presented in Tables
+\ref{table:combinedHard} and \ref{table:combinedEM},
+respectively. F-scores for both approaches are in Table \ref{table:combinedFScores}. 
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+& \multicolumn{2}{|c|}{Reduced feature space} &
+\multicolumn{2}{|c|}{Sparse dataset} \\ \hline
+ & Truth: PD & Truth: Healthy & Truth: PD & Truth: Health\\ \hline
+Predicted: PD & 45 & 15 & 47 & 26 \\ \hline
+Predicted: Healthy &  3 & 33 & 1 & 22 \\ \hline
+
+\end{tabular}
+\end{center}
+\caption[Confusion Matrix for AdaBoost]{A confusion matrix for
+  AdaBoost using hard-labeled combined datasets.}
+\label{table:combinedHard}
+\end{table}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+& \multicolumn{2}{|c|}{Reduced feature space} &
+\multicolumn{2}{|c|}{Sparse dataset} \\ \hline
+ & Truth: PD & Truth: Healthy & Truth: PD & Truth: Health\\ \hline
+Predicted: PD & - & - & - & - \\ \hline
+Predicted: Healthy &  - & - & - & - \\ \hline
+
+\end{tabular}
+\end{center}
+\caption[Confusion Matrix for AdaBoost]{A confusion matrix for
+  AdaBoost using expectation maximization to label combined datasets.}
+\label{table:combinedEM}
+\end{table}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+
+& Reduced feature space & Sparse dataset \\ \hline
+Hard labeled & 0.714 & 0.777 \\ \hline
+Expectation Maximization & - & - \\ \hline
+
+\end{tabular}
+\end{center}
+\caption[Performance on Combined Dataset]{F-scores for classifiers trained and tested on the combined dataset.}
+\label{table:combinedFScores}
 \end{table}
 
 
 \chapter{Conclusion}
 \label{Chapter:Five}
-Conclusion and future work
+Parkinson's Disease is often difficult to
+diagnosis, but even at early stages, small vocal differences may be machine-detectable. Using this information, it becomes possible to predict PD
+using voice recordings from potential patients. Several machine
+learning approaches are effective for this task, with F-Scores above
+0.90. The most effective approach is ensemble learning using
+AdaBoost, with an F-Score of 0.957. 
 
+The results for all three learners
+were similar to those in the literature, with some expected
+difference. Since prior work used a reduced feature space which was
+not explicitly defined, this work was done with the understanding that
+past results would not be exactly replicated. 
+
+Utilizing information from additional datasets is not as helpful as
+predicted. This may be due to a variety of factors. When there isn't a
+perfect overlap between features in different datasets, combining them
+requires discarding some of the features, or having a sparse set with
+many missing values. Neither of these approaches are optimal in
+creating a robust model. Additionally, both the primary and secondary
+datasets in this case were unbalanced, and combining them simply
+increased the overall level of imbalance. There are a few ways of dealing
+with this, but none are as optimal as using a balanced dataset. Undersampling requires throwing
+away data, which leaved fewer data points with which to train and test
+a model. Oversampling requires
+duplication of some
+data points, possibly leading to overfitting. Adjusting cost factor can
+help, but there is a limit to the level of imbalance it can tolerate.
+
+There are several areas for improvement in future work on this
+topic. Feature analysis can be utilized to determine the ideal subset
+of the feature space to use for the highest performance. Since some of
+the attributes are related, this lack of independence may cause these
+attributes to have a disproportionate influence on the
+results. Additionally, it's possible that some attributes do not
+contribute to the results, and reducing the feature space in some way
+may lead to better performance. The number of possible feature sets
+for these 22 attributes is the power set of the attributes, which has
+a cardinality of 4,194,304. Some heuristic approach to limit the
+number of possible subsets would make this problem more feasible to
+solve. 
+
+Additionally, the imbalance of the dataset likely had a detrimental
+effect on performance. Collecting voice recordings from healthy
+subjects seems a manageable task, particularly in comparison to the
+more difficult task of finding PD subjects from whom to collect
+recordings. Obtaining more data to create a balanced dataset would
+likely lead to a significant performance improvement for the various
+learners. 
+
+Finally, the secondary regression dataset might be used in ways other
+than augmenting the primary dataset. For example, regression data
+collected over time may be useful in monitoring the progression of PD,
+reducing the need for constant and inconvenient clinical appointments
+for PD patients. 
+
+All of the approaches used here, as well as the suggested
+modifications, may also be applicable to other binary classification
+problems within the medical domain. PD is a useful starting point due
+to the availability of noninvasively-collected data, but the findings
+here are relevant to a variety of conditions.
 
 \bibliography{srpaper-shashmi-biblio}
 

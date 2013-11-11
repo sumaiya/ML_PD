@@ -2,9 +2,10 @@ This is BibTeX, Version 0.99c (TeX Live 2009)
 The top-level auxiliary file: srpaper-shashmi.aux
 The style file: alpha.bst
 Database file #1: srpaper-shashmi-biblio.bib
+Warning--I didn't find a database entry for "BL13"
 You've used 25 entries,
             2543 wiz_defined-function locations,
-            728 strings with 9122 characters,
+            730 strings with 9130 characters,
 and the built_in function-call counts, 10924 in all, are:
 = -- 1084
 > -- 580
@@ -43,3 +44,4 @@ warning$ -- 0
 while$ -- 103
 width$ -- 30
 write$ -- 325
+(There was 1 warning)

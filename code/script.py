@@ -16,28 +16,28 @@ def main():
     j = options.cost
     data_name = "Parkinsons"
     PD = dataparser.DataSet(name=data_name)
-    identifier = data_name + "4attrs_1degree_C_" + str(k) + "fold_" + datetime.datetime.now().strftime("%H%M%S")
+    identifier = data_name + "10attrs_1degree_j_0.6_" + str(k) + "fold_" + datetime.datetime.now().strftime("%H%M%S")
     path = "PDexamples/" + identifier + "/"
     resultsPath = "../PDexamples/" + identifier + "_results.txt"
     os.system("mkdir " + str(path))
 
-    dataparser.uci_to_svm_k_fold(PD,1,k,path)
+    dataparser.uci_to_svm_k_fold(PD,1,k,path,10)
 
     os.chdir("svm_light/")
     path = "../" + path
 
 # for each of 2 sets: default, degree 2, 3, 4.    
-    for j in [0.01, 0.1, 1, 10, 100, 1000, 10000, 100000]:#map(lambda x: x/float(10), range(1,100)):
+    for j in [1]:#[0.01, 0.1, 1, 10, 100, 1000, 10000, 100000]:#map(lambda x: x/float(10), range(1,100)):
         TP = TN = FP = FN = 0
         for i in range(k):
             train = path + data_name + "_train_" + str(i) + "_SVM.dat"
             test = path + data_name + "_test_" + str(i) + "_SVM.dat"
             model = path + data_name + "_model_" + str(i) + "_" + str(j) + "_SVM.dat"
             predictions = path + data_name + "_predictions_" + str(i) + "_" + str(j) + "_SVM.dat"
-            learn = "./svm_learn -c " + str(j) + " " + train + " " + model #+ " > ../silence.txt"
+            learn = "./svm_learn -t 0 -j 0.9 -c 1000 " + train + " " + model + " > ../silence.txt"
             os.system(learn)
             
-            classify = "./svm_classify " + test + " " + model + " " + predictions #+ " > ../silence.txt"
+            classify = "./svm_classify " + test + " " + model + " " + predictions + " > ../silence.txt"
             os.system(classify)
             
             expectations = [line[0] for line in open(test)]
